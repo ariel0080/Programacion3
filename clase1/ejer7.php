@@ -12,7 +12,7 @@ if(date("m") >=1 && date("m") <=3 )
 else if(date("m") >=4 && date("m") <=6 ) 
 {
 	
-	print("ohtanga");
+	print("ohtangaaaas");
 }
 else if(date("m") >=7 && date("m") <=8 ) 
 {

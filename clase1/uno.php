@@ -1,6 +1,6 @@
 <?php
 
 $dato = "hola";
-require "dos.php";
+require_once "dos.php";
 
 ?>

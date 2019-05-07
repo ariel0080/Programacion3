@@ -4,7 +4,7 @@ echo " Realizar las líneas de código necesarias para generar un Array asociati
 
 $lapiceras = array(
     "Lapicera 1" => array(
-        "color"  => "Verde",
+        "color" => "Verde",
         "marca"  => "Marca1",
         "trazo"  => "fino",
         "precio" => "$50"),
@@ -12,7 +12,7 @@ $lapiceras = array(
         "color"  => "Azul",
         "marca"  => "Marca2",
         "trazo"  => "Ulta fino",
-        "precio" => "$50"),
+        "precio" => "$80"),
     "Lapicera 3" => array(
         "color"  => "Rojo",
         "marca"  => "Marca4",
@@ -21,5 +21,8 @@ $lapiceras = array(
 );
 
 foreach ($lapiceras as $key => $lapicera) {
-    echo "<br>".$key . ":" ."Color".$lapicera['color'] . ";";
+    echo "<br><br>" . $key . ":" . "Color " . $lapicera['color'] . ";";
+    echo "<br>" . $key . ":" . "Marca " . $lapicera['marca'] . ";";
+    echo "<br>" . $key . ":" . "Trazo " . $lapicera['trazo'] . ";";
+    echo "<br>" . $key . ":" . "Precio " . $lapicera['precio'] . ";";
 }

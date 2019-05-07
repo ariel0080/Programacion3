@@ -6,17 +6,15 @@
 require_once 'contenedor.php';
 require_once 'producto.php';
 
-echo "<h1>Aplicaciones Nº 1 (producto conteiner) <br> Los containers puede ser (chico mediano o grande) con una capacidad de 1000kg o 2500kg o 9000kg <br> <br> los productos tiene un identificador unico de producto, el nombre, el importador, el pais de origen y los kilos <br> si el producto ya existe se suma los kilos</h1> ";
+echo "<h3>Aplicaciones Nº 1 (producto conteiner) <br> Los containers puede ser (chico mediano o grande) con una capacidad de 1000kg o 2500kg o 9000kg <br> <br> los productos tiene un identificador unico de producto, el nombre, el importador, el pais de origen y los kilos <br> si el producto ya existe se suma los kilos</h3> ";
 
-$container1 = new contenedor();
-
+$container1 = new contenedor('grande');
 //print_r($container1);
-
 
 $producto1 = new producto();
 
 
-"<br>";
+$container1->agregarProducto($producto1);
 //print_r($producto);
 
 

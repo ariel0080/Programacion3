@@ -21,9 +21,10 @@ $container1->agregarProducto($producto1);
 echo "<br><br><h2>Contenedor: </h2>";
 $container1->mostrar();
 
+ 
 
-echo "<br><br><h2>Producto: </h2> ";
-$producto1->mostrar();
+//echo "<br><br><h2>Producto: </h2> ";
+//$producto1->mostrar(); 
 
 
 

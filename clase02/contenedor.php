@@ -25,7 +25,10 @@ class contenedor
     public function mostrar()
     {
         echo "<br>Id " . $this->id . "<br>" . "Capacidad " . $this->capacidad . "<br> Tamaño " . $this->tam;
-        foreach ($listadoProductos as $value) {
+
+        echo "<br><br> Lista de Productos ";
+        foreach ($this->listadoProductos as $value) 
+        {
 
             $value->mostrar();
         }
@@ -36,9 +39,13 @@ class contenedor
     {
         $bandera = false;
 
-        if (($this->acumuladaCapacidad() + $productoAgregar->kilos) <= $this->maximaCapacidad) {
-            foreach ($this->listadoProductos as $value) {
-                if ($value->id == $productoAgregar->id) {
+        if (($this->acumuladaCapacidad() + $productoAgregar->kilos) <= $this->maximaCapacidad()) 
+
+        {
+            foreach ($this->listadoProductos as $value) 
+            {
+                if ($value->id == $productoAgregar->id) 
+                {
                     $this->capacidad += $productoAgregar->kilos;
                     $bandera = true;
                     break;
@@ -60,32 +67,32 @@ class contenedor
 
     }
 
-    public function maximaCapacidad($tamaño)
+    public function maximaCapacidad()
     {
         $aux;
 
-        switch ($tamaño) {
+        switch ($this->tam) {
             case 'grande':
-                $aux = $this->capacidad = "9000";
+                $aux = "9000";
                 break;
             case 'mediano':
-                $aux = $this->capacidad = "2500";
+                $aux  = "2500";
                 break;
             case 'chico':
-                $aux = $this->capacidad = "1000";
+                $aux = "1000";
                 break;
         }
 
         return $aux;
     }
 
-    public function acumuladaCapacidad($tamaño)
+    public function acumuladaCapacidad()
     {
-        $aux;
+        $aux='0';
 
-        foreach ($listadoProductos as $value) {
+        foreach ($this->listadoProductos as $value) 
+        {
             $aux += $value->kilos;
-
         }
 
         return $aux;

@@ -11,18 +11,18 @@ class producto
     public $kilos;
 
 
-function __construct()
+function __construct($nom, $idd,$import, $pai, $kg )
 {
-    $this->nombre     = '0';
-    $this->importador = '0';
-    $this->id         = '0';
-    $this->pais       = '0';
-    $this->kilos      = '0';
+    $this->nombre     = $nom;
+    $this->importador = $import;  
+    $this->id         = $idd;
+    $this->pais       = $pai;
+    $this->kilos      = $kg;
 }
 
 function mostrar()
 {
-    echo "<br>Id: " . $this->id . "<br>" . "Importador: " . $this->importador . "<br> Nombre: " . $this->nombre;
+    echo "<br><font size='2' color='blue'  face='verdana' style='font-weight:bold'>Id: " . $this->id ."<br> Nombre: " . $this->nombre. "</font><br>" . "Importador: " . $this->importador;
     echo "<br>Pais: " . $this->pais . "<br>" . "Kilos: " . $this->kilos;
 }
 

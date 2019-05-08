@@ -24,9 +24,9 @@ class contenedor
 
     public function mostrar()
     {
-        echo "<br>Id " . $this->id . "<br>" . "Capacidad " . $this->capacidad . "<br> Tamaño " . $this->tam;
+        echo "<br>Id " . $this->id . "<br>"."Capacidad Maxima: " . $this->maximaCapacidad() . "<br>" . "Capacidad Ocupada: " .$this->acumuladaCapacidad() . "<br> Tamaño " . $this->tam;
 
-        echo "<br><br> Lista de Productos ";
+        echo "<br><br> <font size='5' color='red'  face='verdana'> Lista de Productos </font>";
         foreach ($this->listadoProductos as $value) 
         {
 

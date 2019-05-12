@@ -1,7 +1,7 @@
 
 <?php
 
-include_once 'producto.php';
+include_once './producto.php';
 
 class contenedor
 {
@@ -40,18 +40,21 @@ class contenedor
         $bandera = false;
 
         if (($this->acumuladaCapacidad() + $productoAgregar->kilos) <= $this->maximaCapacidad()) 
-
         {
             foreach ($this->listadoProductos as $value) 
             {
-                if ($value->id == $productoAgregar->id) 
-                {
-                    $this->capacidad += $productoAgregar->kilos;
+              
+                if($value->id== $productoAgregar->id) 
+                  {
+                   // echo "KILOS". $value->$kilos."--".$productoAgregar->$kilos;
+                    $value->kilos += $productoAgregar->kilos;
                     $bandera = true;
                     break;
+            
                 }
 
-            }
+}
+
 
             if ($bandera != true) {
                 array_push($this->listadoProductos, $productoAgregar);

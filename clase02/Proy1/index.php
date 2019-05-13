@@ -15,22 +15,19 @@ $producto1 = new producto("Coca Colaa", "001", "Importador 002", "Uruaguay", "20
 $producto3 = new producto("Coca Colaa", "001", "Importador 002", "Chile", "900");
 $producto2 = new producto("Pepsi", "002", "Importador 002", "Uruaguay", "200");
 
-
 //print_r($producto);
 $container1->agregarProducto($producto1);
 $container1->agregarProducto($producto2);
 $container1->agregarProducto($producto3);
 
-
 echo "<br><br><font size='5' color='red'  face='verdana'>Contenedor: </font
 >";
 $container1->mostrar();
 
- 
 //echo "<br><br><h2>Producto: </h2> ";
-//$producto1->mostrar(); 
+//$producto1->mostrar();
 // crear objetos de producto y container
-
+phpinfo();
 ?>
 
 

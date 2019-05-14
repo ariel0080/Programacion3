@@ -1,6 +1,9 @@
 <?php
 
 require_once "Vehiculo.php";
-Vehiculo::Leer();
-
-?>
+$listado = Vehiculo::Leer();
+foreach ($listado as $auto)
+{
+    $auto->MostrarAuto();
+    echo "<br>---------<br>";
+}

@@ -2,31 +2,35 @@
 
 class Vehiculo
 {
-    /*  private $marca;
-    private $color;
-    private $fecha;
-    private $precio;*/
+    private $patente;
+    private $ingreso;
+    private $importe;
 
-    public function __construct( /*$nuevoColor, $nuevoPrecio, $nuevoMarca, $nuevoFecha*/)
+
+    public function __construct($nuevoColor, $nuevoPrecio, $nuevoMarca)
     {
-        /* $this->color = $nuevoColor;
-    $this->precio = $nuevoPrecio;
-    $this->marca = $nuevoMarca;
-    $this->fecha = $nuevoFecha;*/
-
+        $this->patente = $nuevoColor;
+        $this->ingreso = $nuevoPrecio;
+        $this->importe = $nuevoMarca;
     }
 
     public static function Leer()
     {
+        $listadoVehiculos = array();
         $archivo = fopen("vehiculo.txt", "r");
 
-        while (!feof($archivo))
-        {
-            echo "<br> HOLA!";
+        while (!feof($archivo)) {
+            $renglon = fgets($archivo);
+
+            $arrayDeDatos = explode(",", $renglon);
+
+            $auto = new Vehiculo($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2]);
+
+            array_push($listadoVehiculos, $auto);
         }
 
         fclose($archivo);
-
+        return $listadoVehiculos;
     }
 
 /*
@@ -34,14 +38,13 @@ public function getPrecio()
 {
 return $this->precio;
 }
+ */
+    public function MostrarAuto()
+    {
+        echo "Patente: $this->patente || Ingreso: $this->ingreso || Importe: $this->importe";
+    }
 
-public function MostrarAuto()
-{
-echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold'>
-<br> Auto <br> </font>  Marca: " . $this->marca . "<br> Color: " . $this->color .
-"<br> Precio: " . $this->precio . "<br> Fecha: " . $this->fecha;
-}
-
+/*
 public static function Equals($auto1, $auto2)
 {
 if ($auto1->marca == $auto2->marca) {

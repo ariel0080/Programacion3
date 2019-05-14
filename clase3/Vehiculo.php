@@ -19,11 +19,13 @@ class Vehiculo
     public static function Leer()
     {
         $archivo = fopen("vehiculo.txt", "r");
+
         while (!feof($archivo))
         {
-            fread ($archivo);
             echo "<br> HOLA!";
         }
+
+        fclose($archivo);
 
     }
 

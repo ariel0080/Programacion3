@@ -17,10 +17,15 @@ class Auto
 
     }
 
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+
     public function MostrarAuto()
     {
         echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold'>
-        Auto <br> </font>  Marca: " . $this->marca . "<br> Color: " . $this->color .
+        <br> Auto <br> </font>  Marca: " . $this->marca . "<br> Color: " . $this->color .
         "<br> Precio: " . $this->precio . "<br> Fecha: " . $this->fecha;
     }
 
@@ -41,15 +46,11 @@ class Auto
         }
     }
 
-     public function AgregarImpuestos($sumarAlPrecio)
-     {
-     $this->precio = $this->precio + $sumarAlPrecio;
+    public function AgregarImpuestos($sumarAlPrecio)
+    {
+        $this->precio = $this->precio + $sumarAlPrecio;
 
-   }
-
-
-
-
+    }
 
 }
 

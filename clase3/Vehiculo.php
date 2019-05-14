@@ -33,18 +33,41 @@ class Vehiculo
         return $listadoVehiculos;
     }
 
-/*
-public function getPrecio()
-{
-return $this->precio;
-}
- */
+
     public function MostrarAuto()
     {
         echo "Patente: $this->patente || Ingreso: $this->ingreso || Importe: $this->importe";
     }
 
-/*
+    public static function guardar($vehiculoAgregar)
+    {
+        $listadoVehiculos = array();
+        $archivo = fopen("vehiculo.txt", "a");
+
+        fwrite("vehiculo.txt", implode(',', $vehiculoAgregar->toArray()));
+
+        fclose($archivo);
+        return $listadoVehiculos;
+    }
+
+    public  function toArray()
+    {
+        $arrayAux = array();
+        array_push($arrayAux, $this->patente);
+        array_push($arrayAux, $this->ingreso);
+        array_push($arrayAux, $this->importe);
+
+        return $arrayAux;
+    }
+
+
+
+
+
+
+
+
+    /*
 public static function Equals($auto1, $auto2)
 {
 if ($auto1->marca == $auto2->marca) {
@@ -67,5 +90,4 @@ public function AgregarImpuestos($sumarAlPrecio)
 $this->precio = $this->precio + $sumarAlPrecio;
 
 }*/
-
 }

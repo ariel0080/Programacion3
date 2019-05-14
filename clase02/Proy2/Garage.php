@@ -4,9 +4,9 @@ require 'auto.php';
 
 class Garage
 {
-$precioPorHora;
-$autos;
-$razonSocial;
+private $precioPorHora;
+private $autos;
+private $razonSocial;
 
 public function __construct($razon, $precio)
 {
@@ -15,28 +15,57 @@ public function __construct($razon, $precio)
     $this->autos = array();
 }
 
-function MostrarGarage()
+public function MostrarGarage()
 {
 
         echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold'>
         <br> Garage <br> </font> Razon Social: " . $this->razonSocial.
         "<br> Precio: ". $this->precioPorHora;
+        foreach($this->autos as $auto)
+        {
+            $auto->MostrarAuto();
+        }
 
 }
 
-function Equal ($garage, $auto)
+public function Equals ($auto)
 {
-    foreach ($garage as $autoIn)
+   return in_array($this->autos, $auto);
+
+}
+
+public function Add($autoAgregar)
+{
+    if (in_array($this->autos, $autoAgregar))
     {
-        if($autoIn->Equals($auto))
+        echo "<br>----------------el auto ya se encuenta en el garage!<br>----------------";
+
+    } else {
+        $this->autos->array_push($autoAgregar);
+    }
+}
+
+public function Remove ($autoQuita)
+{
+$esta=false;
+
+    foreach( $this->autos as $auto)
+    {
+        if($auto->Equals($autoQuita))
         {
-            return true;
+            unset($this->autos, $auto)
+            $esta = true;
         }
+    }
+    if(!$esta)
+    {
+        echo "<br>----------------el auto no se encuentra en el garage<br>----------------";
 
     }
 
-        return false;
+
 }
+
 
 
 

@@ -17,15 +17,10 @@ class Auto
 
     }
 
-    public function AgregarImpuestos($sumarAlPrecio)
-    {
-        $this->precio += (int) $sumarAlPrecio;
-    }
-
     public function MostrarAuto()
     {
         echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold'>
-        Auto </font>  Marca: " . $this->marca . "<br> Color: " . $this->color .
+        Auto <br> </font>  Marca: " . $this->marca . "<br> Color: " . $this->color .
         "<br> Precio: " . $this->precio . "<br> Fecha: " . $this->fecha;
     }
 
@@ -41,10 +36,20 @@ class Auto
         if ($auto1->marca == $autoAgregar->marca && $auto1->color == $autoAgregar->color) {
             return $auto1->precio + $autoAgregar->precio;
         } else {
-            echo "LOS AUTOS NO SON IGUALES";
+            echo "<br>LOS AUTOS NO SON IGUALES";
             return 0;
         }
     }
+
+     public function AgregarImpuestos($sumarAlPrecio)
+     {
+     $this->precio = $this->precio + $sumarAlPrecio;
+
+   }
+
+
+
+
 
 }
 

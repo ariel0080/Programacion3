@@ -1,29 +1,26 @@
 <?php
 require_once "Pasajero.php";
 require_once "Vuelo.php";
-//$name="sin dato", $surname="sin dato", $document="00000000", $plus=FALSE
-$pasajero1=new Pasajero("Mariano", "Madou", "27387009", TRUE);
+
+$pasajero1 = new Pasajero("LOLO", "coco", "30887999", TRUE);
+$pasajero=new Pasajero("LALA", "MAMA", "99999999", FALSE);
 $pasajero2=new Pasajero("Mercedes", "Guerrero", "34152235", FALSE);
 
 $vuelo1=new Vuelo("2 de enero","Aerolineas Argentinas",950,3);
 $vuelo2 = new Vuelo("4 de julio","Norway Airlines",1180,5);
 
-Pasajero::MostrarPasajero($pasajero1);
 
-/*$vuelo1->AgregarPasajero($pasajero1);
-$vuelo1->AgregarPasajero($pasajero2);
-$vuelo1->AgregarPasajero($pasajero3);
-echo "vuelo 1 con carga";
-$vuelo1->getVuelo();*/
-
-/*
 echo "<br><strong>Agregando pasajeros 1 2 y 3 al vuelo 1 (Buenos Aires - Bahía)....</strong><br>";
+$vuelo1->AgregarPasajero($pasajero);
 $vuelo1->AgregarPasajero($pasajero1);
 $vuelo1->AgregarPasajero($pasajero2);
-$vuelo1->AgregarPasajero($pasajero3);
-
-echo "<br>********************************************************************************************************";
 echo "<br><strong>Mostrar vuelo 1 (Buenos Aires - Bahía)</strong><br>";
+$vuelo1->getVuelo();
+
+
+/*
+echo "<br>********************************************************************************************************";
+
 Vuelo::MostrarVuelo($vuelo1);
 echo "<br>********************************************************************************************************<br>";
 echo "<br><strong>Eliminando del vuelo 1 al pasajero 3.</strong><br>";

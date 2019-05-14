@@ -1,6 +1,5 @@
 <?php
 
-include_once 'Pasajero.php';
 class Vuelo
 {
 
@@ -10,9 +9,8 @@ class Vuelo
     private $listadoPasajeros;
     private $cantMaxima;
 
-    public function __constructor($fech, $empre, $prec, $max)
+    public function __construct($fech, $empre, $prec, $max)
     {
-
         $this->fecha = $fech;
         $this->empresa = $empre;
         $this->precio = $prec;
@@ -28,17 +26,18 @@ class Vuelo
 
     public function getVuelo()
     {
-        $aux;
-        foreach ($this->listadoPasajeros as $pasajero) {
-            $aux += Pasajero::MostrarPasajero($pasajero);
-        }
-        return "<font size='3' color='blue'  face='verdana' style='font-weight:bold'>
-    <br> Pasajero  </font>
-    <br> Fecha  " . $this->fecha .
+        $aux = "<font size='3' color='blue'  face='verdana' style='font-weight:bold'>
+        <br> Pasajero  </font>
+        <br> Fecha  " . $this->fecha .
         "<br> Empresa: " . $this->empresa .
         "<br> Precio" . $this->precio .
         "<br> Cantidad Maxima: " . $this->cantMaxima .
-            "<br> Pasajeros: " . $aux;
+            "<br> Pasajeros: ";
+
+        foreach ($this->listadoPasajeros as $pasajero) {
+            $aux = $aux.Pasajero::MostrarPasajero($pasajero);
+        }
+        return $aux;
     }
 
     public function AgregarPasajero($pasajero)

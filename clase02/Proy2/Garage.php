@@ -1,6 +1,5 @@
 <?php
-
-require 'auto.php';
+require_once 'auto.php';
 
 class Garage
 {
@@ -27,15 +26,15 @@ class Garage
 
     public function Equals($auto)
     {
-        return in_array($this->autos, $auto);
+        return in_array( $auto,$this->autos);
     }
 
     public function Add($autoAgregar)
     {
-        if (in_array($this->autos, $autoAgregar)) {
+        if (in_array( $autoAgregar, $this->autos)) {
             echo "<br>----------------el auto ya se encuenta en el garage!<br>----------------";
         } else {
-            $this->autos->array_push($autoAgregar);
+            array_push( $this->autos, $autoAgregar);
         }
     }
 
@@ -43,9 +42,10 @@ class Garage
     {
         $esta = false;
 
-        foreach ($this->autos as $auto) {
-            if ($auto->Equals($autoQuita)) {
-                unset($this->autos, $auto);
+        foreach ($this->autos as $key => $auto) {
+            if (Auto::Equals($autoQuita, $auto) )
+            {
+                unset($this->autos[$key]);
                 $esta = true;
             }
         }

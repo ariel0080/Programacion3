@@ -42,9 +42,11 @@ class Vehiculo
     public static function guardar($vehiculoAgregar)
     {
         $listadoVehiculos = array();
-        $archivo = fopen("vehiculo.txt", "a");
+        $archivo = fopen("vehiculo.txt", "a+");
 
-        fwrite("vehiculo.txt", implode(',', $vehiculoAgregar->toArray()));
+        $aux = implode(',', $vehiculoAgregar->toArray());
+
+        fputs($archivo,  "\n".$aux);
 
         fclose($archivo);
         return $listadoVehiculos;

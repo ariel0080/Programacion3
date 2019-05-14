@@ -13,11 +13,20 @@
 <body>
 
 
-<?php
+    <?php
 
-require_once "traerVehiculo.php";
+    $metodo = $_SERVER['REQUEST_METHOD'];
+    echo $metodo . "<br>";
+    require_once "crearVehiculo.php";
+    require_once "traerVehiculo.php";
 
-?>
+
+
+
+    ?>
+
+
+
 
 </body>
 

@@ -15,52 +15,49 @@
 
     <?php
 
-    $metodo = $_SERVER['REQUEST_METHOD'];
-    echo $metodo . "<br>";
-    switch ($metodo)
-    {
-    case "GET":
-    if( $_GET["que hacer"]=="traerTodos")
-    {
-        //llamar a metodos traer todos
-    }
-    break;
-
-    case "POST":
-    if( $_POST["PARAMETRO"]=="traerTodos")
-    {
-        //llamar a metodos traer todos
-    }
-    break;
-
-    case "DELETE":
-    if( $_POST["PARAMETRO"]=="traerTodos")
-    {
-        //llamar a metodos traer todos
-    }
-    break;
-
-    case "PUT":
-    if( $_POST["PARAMETRO"]=="traerTodos")
-    {
-        //llamar a metodos traer todos
-    }
-    break;
-
-
-
 
     require_once "crearVehiculo.php";
     require_once "traerVehiculo.php";
 
+    $metodo = $_SERVER['REQUEST_METHOD'];
+    echo $metodo . "<br>";
+    switch ($metodo) {
+        case "GET":
+            if ($_GET["que hacer"] == "traerTodos") {
+                //llamar a metodos traer todos
+            }
+            break;
+
+        case "POST":
+            if ($_POST["PARAMETRO"] == "traerTodos") {
+                //llamar a metodos traer todos
+            }
+            break;
+
+        case "DELETE":
+            if ($_POST["PARAMETRO"] == "traerTodos") {
+                //llamar a metodos traer todos
+            }
+            break;
+
+        case "PUT":
+            if ($_POST["PARAMETRO"] == "traerTodos") {
+                //llamar a metodos traer todos
+            }
+            break;
 
 
 
-    ?>
 
 
 
 
-</body>
 
-</html>
+            ?>
+
+
+
+
+    </body>
+
+    </html>

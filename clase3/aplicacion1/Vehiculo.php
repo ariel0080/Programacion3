@@ -33,6 +33,11 @@ class Vehiculo
         return $listadoVehiculos;
     }
 
+    public function getPatente ()
+    {
+        return $this->patente;
+    }
+
 
     public function MostrarAuto()
     {

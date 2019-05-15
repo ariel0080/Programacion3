@@ -11,11 +11,8 @@
 </head>
 
 <body>
-
-
     <?php
-
-
+    require_once 'estacionamiento.php';
     require_once "crearVehiculo.php";
     require_once "traerVehiculo.php";
 
@@ -23,41 +20,27 @@
     echo $metodo . "<br>";
     switch ($metodo) {
         case "GET":
-            if ($_GET["que hacer"] == "traerTodos") {
-                //llamar a metodos traer todos
+            if ($_GET["quehacer"] == "traerTodos") {
+
+                echo "algo algo";
             }
             break;
 
         case "POST":
-            if ($_POST["PARAMETRO"] == "traerTodos") {
-                //llamar a metodos traer todos
-            }
+         
+            Estacionamiento::vehiculoEstacionado($_POST["autoIngresado"]);
+            echo "lolo";
             break;
 
         case "DELETE":
-            if ($_POST["PARAMETRO"] == "traerTodos") {
-                //llamar a metodos traer todos
-            }
+            echo "delete";
             break;
 
         case "PUT":
-            if ($_POST["PARAMETRO"] == "traerTodos") {
-                //llamar a metodos traer todos
-            }
+            echo "put";
             break;
+    }     ?>
 
+</body>
 
-
-
-
-
-
-
-            ?>
-
-
-
-
-    </body>
-
-    </html>
+</html>

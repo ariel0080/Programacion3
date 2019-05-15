@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Vehiculo.php';
+
 class Estacionamiento
 {
     private $nombre;
@@ -24,24 +25,33 @@ class Estacionamiento
 
             $arrayDeDatos = explode(",", $renglon);
 
-            $auto = new Vehiculo($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2]);
+            var_dump($arrayDeDatos);
 
-            array_push($listadoVehiculos, $auto);
+            echo "<br>----------------<br>";
+
+            if ($arrayDeDatos[0] != "") {
+                echo "prueba null";
+
+                $auto = new Vehiculo($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2]);
+
+                array_push($listadoVehiculos, $auto);
+            }
         }
 
         fclose($archivo);
         return $listadoVehiculos;
     }
 
-    
-    public static function agregarVehiculosEstacionamiento($vehiculoAgregar)
+
+    public static function guardarVehiculosEstacionamiento($vehiculoAgregar)
     {
         $listadoVehiculos = array();
+        echo "agregarVehiculosEstacionamiento";
         $archivo = fopen("estacionamiento.csv", "w");
 
         $aux = implode(',', $vehiculoAgregar->toArray());
 
-        fputs($archivo,  "\n".$aux);
+        fputs($archivo,  "\n" . $aux);
 
         fclose($archivo);
         return $listadoVehiculos;
@@ -51,22 +61,16 @@ class Estacionamiento
     public function vehiculoEstacionado($patent)
     {
         $this->listaAutos = Estacionamiento::Leer();
-        $esta= false;
+        $esta = false;
 
-        foreach ($this->listaAutos as $auto)
-         {
-            if ($auto->getPatente == $patent) 
-            {
-
-             } 
-           
+        foreach ($this->listaAutos as $auto) {
+            if ($auto->getPatente == $patent) { }
         }
-        if (!esta)
-        {
-                $autoNuevo = new Vehiculo($patent, date("d/m/y"), 90);
-                array_push($this->listaAutos, $autoNuevo);
-                Estacionamiento::agregarVehiculosEstacionamiento($autoNuevo);
-                echo "deberia haber grabado";
+        if (!esta) {
+            $autoNuevo = new Vehiculo($patent, date("d/m/y"), 90);
+            array_push($this->listaAutos, $autoNuevo);
+            Estacionamiento::agregarVehiculosEstacionamiento($autoNuevo);
+            echo "deberia haber grabado";
         }
     }
 }

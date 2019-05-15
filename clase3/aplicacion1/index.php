@@ -27,7 +27,7 @@
             break;
 
         case "POST":
-         
+
             Estacionamiento::vehiculoEstacionado($_POST["autoIngresado"]);
             echo "lolo";
             break;

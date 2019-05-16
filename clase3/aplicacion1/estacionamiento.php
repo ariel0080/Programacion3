@@ -14,34 +14,76 @@ class Estacionamiento
         $this->listaAutos = array();
     }
 
+/**
+ */
 
-    public static function Leer()
+    public static function LeerJSON()
     {
         $listadoVehiculos = array();
-        $archivo = fopen("estacionamiento.csv", "r");
+        $archivo = file_get_contents('estacionamiento.json');
+      
+            $json_data = json_decode($archivo,true);
 
-        while (!feof($archivo))
-        {
-            $renglon = fgets($archivo);
-
-            $arrayDeDatos = explode(",", $renglon);
-
-                $auto = new Vehiculo($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2]);
-
+            foreach ($json_data as $key => $value) 
+            {              
+                $auto = new Vehiculo( $json_data[$key]["patente"] , $json_data[$key]["fecha"], $json_data[$key]["precio"]);
                 array_push($listadoVehiculos, $auto);
+            }   
+    
 
-        }
+        return $listadoVehiculos;
+    }
+ /**    
+ 
+ */
+
+    public static function agregarVehiculosEstacionamientoJson($lista)
+    {
+        $listadoVehiculos = $lista;
+        echo "agregarVehiculosEstacionamiento";
+        $archivo = fopen("estacionamiento.json", "a");
+
+        var_dump($listadoVehiculos);
+
+        foreach ($listadoVehiculos as $key )
+        {
+            $array = array('patente' => $key->getPatente(), 'fecha' => date("d/m/y"),'precio' =>0);
+            fputs($archivo,  json_encode($array, JSON_PRETTY_PRINT).',');
+        }      
 
         fclose($archivo);
         return $listadoVehiculos;
     }
 
+//////////////////////////////////////////////
 
-    public static function agregarVehiculosEstacionamiento($vehiculoAgregar)
+
+public static function Leer()
+{
+    $listadoVehiculos = array();
+    $archivo = fopen("estacionamiento.csv", "r");
+
+    while (!feof($archivo))
     {
-        $listadoVehiculos = array();
+        $renglon = fgets($archivo);
+
+        $arrayDeDatos = explode(",", $renglon);
+
+        $auto = new Vehiculo($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2]);
+
+        array_push($listadoVehiculos, $auto);
+
+    }
+
+    fclose($archivo);
+    return $listadoVehiculos;
+}
+
+    public static function agregarVehiculosEstacionamiento($lista, $vehiculoAgregar)
+    {
+        $listadoVehiculos = $lista;
         echo "agregarVehiculosEstacionamiento";
-        $archivo = fopen("estacionamiento.csv", "w");
+        $archivo = fopen("estacionamiento.csv", "a+");
 
         $aux = implode(',', $vehiculoAgregar->toArray());
 
@@ -54,7 +96,7 @@ class Estacionamiento
 
     public static function vehiculoEstacionado($patent)
     {
-        $listadoVehiculo= Estacionamiento::Leer();
+        $listadoVehiculo= Estacionamiento::LeerJSON();
 
         $auto = Estacionamiento::estaEstacionado($patent, $listadoVehiculo);
 
@@ -62,7 +104,8 @@ class Estacionamiento
         {
             $autoNuevo = new Vehiculo($patent, date("d/m/y"), 0);
             array_push($listadoVehiculo, $autoNuevo);
-            Estacionamiento::agregarVehiculosEstacionamiento($autoNuevo);
+            Estacionamiento::agregarVehiculosEstacionamiento($listadoVehiculo, $autoNuevo);
+            Estacionamiento::agregarVehiculosEstacionamientoJson($listadoVehiculo);
             echo "deberia haber grabado";
         }
 

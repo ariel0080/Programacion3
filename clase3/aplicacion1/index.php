@@ -20,14 +20,15 @@
     echo $metodo . "<br>";
     switch ($metodo) {
         case "GET":
-            if ($_GET["quehacer"] == "traerTodos") {
+            if ($_GET["quehacer"] == "traerTodos") 
+            {
 
                 echo "algo algo";
             }
             break;
 
         case "POST":
-           // echo "lolo".$_POST["autoIngresado"];
+           echo "lolo".$_POST["autoIngresado"];
             Estacionamiento::vehiculoEstacionado($_POST["autoIngresado"]);
             break;
 

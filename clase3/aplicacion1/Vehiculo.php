@@ -4,14 +4,14 @@ class Vehiculo
 {
     private $patente;
     private $ingreso;
-    private $importe;
+    private $importePago;
 
 
-    public function __construct($nuevoColor, $nuevoPrecio, $nuevoMarca)
+    public function __construct($nuevoPatente, $nuevoIngreso, $nuevoImporte=0)
     {
-        $this->patente = $nuevoColor;
-        $this->ingreso = $nuevoPrecio;
-        $this->importe = $nuevoMarca;
+        $this->patente = $nuevoPatente;
+        $this->ingreso = $nuevoIngreso;
+        $this->importePago = $nuevoImporte;
     }
 
     public static function Leer()
@@ -33,7 +33,9 @@ class Vehiculo
         return $listadoVehiculos;
     }
 
-    public function getPatente ()
+
+
+    public function getPatente()
     {
         return $this->patente;
     }
@@ -41,7 +43,7 @@ class Vehiculo
 
     public function MostrarAuto()
     {
-        echo "Patente: $this->patente || Ingreso: $this->ingreso || Importe: $this->importe";
+        echo "Patente: $this->patente || Ingreso: $this->ingreso || Importe: $this->importePago";
     }
 
     public static function guardar($vehiculoAgregar)
@@ -62,7 +64,7 @@ class Vehiculo
         $arrayAux = array();
         array_push($arrayAux, $this->patente);
         array_push($arrayAux, $this->ingreso);
-        array_push($arrayAux, $this->importe);
+        array_push($arrayAux, $this->importePago);
 
         return $arrayAux;
     }

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Vehiculo.php';
+require_once  'Vehiculo.php';
 
 class Estacionamiento
 {
@@ -20,22 +20,16 @@ class Estacionamiento
         $listadoVehiculos = array();
         $archivo = fopen("estacionamiento.csv", "r");
 
-        while (!feof($archivo)) {
+        while (!feof($archivo))
+        {
             $renglon = fgets($archivo);
 
             $arrayDeDatos = explode(",", $renglon);
 
-            var_dump($arrayDeDatos);
-
-            echo "<br>----------------<br>";
-
-            if ($arrayDeDatos[0] != "") {
-                echo "prueba null";
-
                 $auto = new Vehiculo($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2]);
 
                 array_push($listadoVehiculos, $auto);
-            }
+
         }
 
         fclose($archivo);
@@ -43,7 +37,7 @@ class Estacionamiento
     }
 
 
-    public static function guardarVehiculosEstacionamiento($vehiculoAgregar)
+    public static function agregarVehiculosEstacionamiento($vehiculoAgregar)
     {
         $listadoVehiculos = array();
         echo "agregarVehiculosEstacionamiento";
@@ -58,19 +52,36 @@ class Estacionamiento
     }
 
 
-    public function vehiculoEstacionado($patent)
+    public static function vehiculoEstacionado($patent)
     {
-        $this->listaAutos = Estacionamiento::Leer();
-        $esta = false;
+        $listadoVehiculo= Estacionamiento::Leer();
 
-        foreach ($this->listaAutos as $auto) {
-            if ($auto->getPatente == $patent) { }
-        }
-        if (!esta) {
-            $autoNuevo = new Vehiculo($patent, date("d/m/y"), 90);
-            array_push($this->listaAutos, $autoNuevo);
+        $auto = Estacionamiento::estaEstacionado($patent, $listadoVehiculo);
+
+        if ($auto==null)
+        {
+            $autoNuevo = new Vehiculo($patent, date("d/m/y"), 0);
+            array_push($listadoVehiculo, $autoNuevo);
             Estacionamiento::agregarVehiculosEstacionamiento($autoNuevo);
             echo "deberia haber grabado";
         }
+
+
+    }
+
+    public static function estaEstacionado( $patent , $listadoVehiculo)
+    {
+
+
+        foreach ($listadoVehiculo as $auto)
+        {
+            if ($auto->getPatente() == $patent)
+            {
+                echo"Esta en el estacionamiento";
+                return $auto;
+                break;
+             }
+        }
+        return null;
     }
 }

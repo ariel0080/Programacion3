@@ -62,6 +62,12 @@ class Vehiculo
         return $arrayAux;
     }
 
+    public  function getPatente()
+    {
+  
+
+        return $this->patente;
+    }
 
 
 

@@ -13,8 +13,8 @@
 <body>
     <?php
     require_once 'estacionamiento.php';
-    require_once "crearVehiculo.php";
-    require_once "traerVehiculo.php";
+     //  require_once "crearVehiculo.php";
+     // require_once "traerVehiculo.php";
 
     $metodo = $_SERVER['REQUEST_METHOD'];
     echo $metodo . "<br>";
@@ -27,9 +27,8 @@
             break;
 
         case "POST":
-
+           // echo "lolo".$_POST["autoIngresado"];
             Estacionamiento::vehiculoEstacionado($_POST["autoIngresado"]);
-            echo "lolo";
             break;
 
         case "DELETE":

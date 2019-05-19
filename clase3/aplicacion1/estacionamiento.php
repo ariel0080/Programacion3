@@ -23,10 +23,10 @@ class Estacionamiento
     *
     *
     */
-    public static function LeerJSON()
+    public static function LeerJSON($nombreArchivo)
     {
         $listadoVehiculos = array();
-        $archivo = file_get_contents('estacionamiento.json');
+        $archivo = file_get_contents($nombreArchivo.'.json');
 
             $json_data = json_decode($archivo,true);
 
@@ -44,11 +44,11 @@ class Estacionamiento
     *
     *
     */
-    public static function agregarVehiculosEstacionamientoJson($lista)
+    public static function agregarVehiculosEstacionamientoJson($lista, $nombreArchivo)
     {
         $listadoVehiculos = $lista;
         echo "agregarVehiculosEstacionamiento";
-        $archivo = fopen("estacionamiento.json", "w");
+        $archivo = fopen($nombreArchivo.'.json', "w");
 
         var_dump($listadoVehiculos);
 
@@ -56,7 +56,7 @@ class Estacionamiento
         {
           if(! ($key->getPatente()=='' || $key->getPatente()=='\n'))
           {
-              $array = array('patente' => $key->getPatente(), 'fecha' => date("d/m/y"),'precio' =>0);
+              $array = array('patente' => $key->getPatente(), 'fecha' => date("h:m"),'precio' =>0);
               fputs($archivo,  json_encode($array, JSON_PRETTY_PRINT).',');
           }
 
@@ -70,16 +70,16 @@ class Estacionamiento
 
 
 //#region Archivos csv txt
-    public static function Leer($formato)
+    public static function Leer($formato, $nombreArchivo)
     {
     $listadoVehiculos = array();
 
     switch ($formato) {
         case "csv":
-        $archivo = fopen("estacionamiento.csv", "r");
+        $archivo = fopen($nombreArchivo.'.csv', "r");
             break;
         case "txt":
-        $archivo = fopen("estacionamiento.txt", "r");
+        $archivo = fopen($nombreArchivo.'.txt', "r");
             break;
      }
 
@@ -99,16 +99,16 @@ class Estacionamiento
     return $listadoVehiculos;
 }
 
-    public static function agregarVehiculosEstacionamiento($lista, $vehiculoAgregar,$formato)
+    public static function agregarVehiculosEstacionamiento($lista, $vehiculoAgregar,$formato , $nombreArchivo)
     {
         $listadoVehiculos = $lista;
             
     switch ($formato) {
         case "csv":
-        $archivo = fopen("estacionamiento.csv", "a+");
+        $archivo = fopen($nombreArchivo.".csv", "a+");
             break;
         case "txt":
-        $archivo = fopen("estacionamiento.txt", "a+");
+        $archivo = fopen($nombreArchivo.".txt", "a+");
             break;
      }
     
@@ -130,18 +130,18 @@ class Estacionamiento
 
     public static function vehiculoEstacionado($patent)
     {
-       $listadoVehiculo= Estacionamiento::Leer("csv");        
+       $listadoVehiculo= Estacionamiento::Leer("csv", "estacionamiento");        
       // $listadoVehiculo= Estacionamiento::Leer("txt");        
 
         $auto = Estacionamiento::estaEstacionado($patent, $listadoVehiculo);
 
         if ($auto==null)
         {
-            $autoNuevo = new Vehiculo($patent, date("d/m/y"), 0);
+            $autoNuevo = new Vehiculo($patent, date("h:m"), 0);
             array_push($listadoVehiculo, $autoNuevo);
-            Estacionamiento::agregarVehiculosEstacionamiento($listadoVehiculo, $autoNuevo, "txt");
-            Estacionamiento::agregarVehiculosEstacionamiento($listadoVehiculo, $autoNuevo, "csv");
-            Estacionamiento::agregarVehiculosEstacionamientoJson($listadoVehiculo);
+            Estacionamiento::agregarVehiculosEstacionamiento($listadoVehiculo, $autoNuevo, "txt", "estacionamiento");
+            Estacionamiento::agregarVehiculosEstacionamiento($listadoVehiculo, $autoNuevo, "csv","estacionamiento");
+            Estacionamiento::agregarVehiculosEstacionamientoJson($listadoVehiculo, "estacionamiento");
             echo "deberia haber grabado";
         }
     }

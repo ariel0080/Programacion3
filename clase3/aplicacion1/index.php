@@ -28,8 +28,10 @@
             break;
 
         case "POST":
-           echo "lolo".$_POST["autoIngresado"];
+            echo "lolo".$_POST["autoIngresado"];
+            echo "lolo".$_POST["autoSaliendo"];
             Estacionamiento::vehiculoEstacionado($_POST["autoIngresado"]);
+            //Estacionamiento::removervehiculoEstacionado($_POST["autoSaliendo"]);
             break;
 
         case "DELETE":

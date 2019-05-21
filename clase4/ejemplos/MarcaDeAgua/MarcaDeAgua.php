@@ -1,6 +1,11 @@
 <?php
-$im = imagecreatefrompng("fotoUno.png");
-$estampa = imagecreatefrompng('fotoDos.png');
+
+class MarcadeAgua
+{
+    public static function hacerMarca ($fotoUno)
+    {
+     $im = imagecreatefrompng($fotoUno);
+     $estampa = imagecreatefrompng( "archivos/postman.png" );
 
 
 // Establecer los márgenes para la estampa y obtener el alto/ancho de la imagen de la estampa
@@ -10,13 +15,20 @@ $sx = imagesx($estampa);
 $sy = imagesy($estampa);
 
 // Copiar la imagen de la estampa sobre nuestra foto usando los índices de márgen y el
-// ancho de la foto para calcular la posición de la estampa. 
+// ancho de la foto para calcular la posición de la estampa.
 imagecopy($im, $estampa, imagesx($im) - $sx - $margen_dcho, imagesy($im) - $sy - $margen_inf, 0, 0, imagesx($estampa), imagesy($estampa));
 
 // Imprimir y liberar memoria
-header('Content-type: image/png');
-imagepng($im);
-imagedestroy($im);
+//header('Content-type: image/png');
+
+imagepng($im , $fotoUno);
+
+
+    }
+
+
+
+}
 
 
 ?>

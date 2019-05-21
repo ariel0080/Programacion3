@@ -1,6 +1,6 @@
 <?php
-	$path = "test.php";
-	//$path = "upload.php";
+	//$path = "test.php";
+	$path = "upload.php";
 ?>
 <!doctype html>
 <html>
@@ -10,7 +10,8 @@
 	</head>
 	<body>
 		<form action="<?php echo $path; ?>" method="post" enctype="multipart/form-data" >
-			<input type="file" name="archivo" /> 
+			<input type="file" name="archivo" />
+			<input type="text" name="nombre" />
 			<br/>
 			<input type="submit" value="Subir" />
 		</form>

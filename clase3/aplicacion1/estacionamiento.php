@@ -37,7 +37,7 @@ class Estacionamiento
     /**
      *
      *
-     * 
+     *
      *
      */
     public static function guardarVehiculosEstacionamientoJson($lista, $nombreArchivo)
@@ -47,9 +47,11 @@ class Estacionamiento
         $archivo = fopen($nombreArchivo . '.json', "w");
 
         echo '<pre>', var_dump($listadoVehiculos), '</pre>';
-   
-        foreach ($listadoVehiculos as $key) {
-            if (!($key->getPatente() == '' || $key->getPatente() == '\n')) {
+
+        foreach ($listadoVehiculos as $key)
+        {
+            if (!($key->getPatente() == '' || $key->getPatente() == '\n'))
+            {
                 $array = array('patente' => $key->getPatente(), 'fecha' => date("h:m"), 'precio' => 0);
                 fputs($archivo,  json_encode($array, JSON_PRETTY_PRINT) . ',');
             }
@@ -83,7 +85,7 @@ class Estacionamiento
         }
 
         fclose($archivo);
-        return $listadoVehiclos;
+        return $listadoVehiculos;
     }
 
 

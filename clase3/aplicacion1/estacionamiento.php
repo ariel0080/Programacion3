@@ -46,8 +46,8 @@ class Estacionamiento
         echo "agregarVehiculosEstacionamiento";
         $archivo = fopen($nombreArchivo . '.json', "w");
 
-        var_dump($listadoVehiculos);
-
+        echo '<pre>', var_dump($listadoVehiculos), '</pre>';
+   
         foreach ($listadoVehiculos as $key) {
             if (!($key->getPatente() == '' || $key->getPatente() == '\n')) {
                 $array = array('patente' => $key->getPatente(), 'fecha' => date("h:m"), 'precio' => 0);
@@ -75,7 +75,7 @@ class Estacionamiento
         while (!feof($archivo)) {
             $renglon = fgets($archivo);
 
-            $arrayDeDatos = explode(",", $renglon);
+            $arrayDeDatos = explode(',', $renglon);
 
             $auto = new Vehiculo($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2]);
 
@@ -83,7 +83,7 @@ class Estacionamiento
         }
 
         fclose($archivo);
-        return $listadoVehiculos;
+        return $listadoVehiclos;
     }
 
 
@@ -100,7 +100,7 @@ class Estacionamiento
                 break;
         }
 
-        echo "<h1>agregarVehiculosEstacionamiento<br> </h1>";
+       echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>Agregar elemento en csv o txt <br> </font>";
 
         $aux = implode(',', $vehiculoAgregar->toArray());
 
@@ -123,7 +123,7 @@ class Estacionamiento
                 break;
         }
 
-        echo "<h1>guardado de lista entera<br> </h1>";
+        echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>Lista Guardada COMPLETA en csv o txt <br> </font>";
 
         foreach ($lista as $vehiculoAgregar) {
 
@@ -162,28 +162,54 @@ class Estacionamiento
         }
     }
 
+    public static function MostrarEstacionas()
+    {
+        $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
+
+        foreach ($listadoVehiculo as $key => $auto) {
+            if ($auto->getPatente() != '') {
+                $auto->MostrarAuto();
+                echo "<br>";
+            }
+        }
+    }
+    public static function MostrarFacturado()
+    {
+        $listadoVehiculo = Estacionamiento::Leer("csv", "facturado");
+        $acumulador = 0;
+
+        foreach ($listadoVehiculo as $key => $auto) {
+            if ($auto->getPatente() != '') {
+                $auto->MostrarAuto();
+                $acumulador += $auto->getImporte();
+                echo "<br>";
+            }
+        }
+
+        echo " el total facturado fue $acumulador";
+    }
+
     public static function removervehiculoEstacionado($patent)
     {
         $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
         $auto = Estacionamiento::estaEstacionadoKey($patent, $listadoVehiculo);
-        echo ' <br><br><br> el auto esta en: '.$auto;
-      //  $listadoVehiculo[$auto]->MostrarAuto();
+        echo ' <br><br><br> el auto esta en: ' . $auto;
+        //  $listadoVehiculo[$auto]->MostrarAuto();
         if ($auto != null) {
             echo " <br> el auto se encuntra en el estacionamiento <br> ";
             $listadoFacturado = Estacionamiento::Leer("csv", "facturado");
             $listadoVehiculo[$auto]->setImporte();
-            array_push( $listadoFacturado, $listadoVehiculo[$auto]);
-            echo '<pre>', var_dump( $listadoFacturado), '</pre>';
+            array_push($listadoFacturado, $listadoVehiculo[$auto]);
+            echo '<pre>', var_dump($listadoFacturado), '</pre>';
             Estacionamiento::guardarVehiculosEstacionamiento($listadoFacturado, "csv", "facturado");
-            
-            
+
+
             unset($listadoVehiculo[$auto]);
-            
+
             Estacionamiento::guardarVehiculosEstacionamiento($listadoVehiculo, "csv", "estacionamiento");
             Estacionamiento::guardarVehiculosEstacionamiento($listadoVehiculo, "txt", "estacionamiento");
             Estacionamiento::guardarVehiculosEstacionamientoJson($listadoVehiculo, "estacionamiento");
             echo "deberia haber guardado sin el auto borrado";
-            
         }
     }
 

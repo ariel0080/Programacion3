@@ -16,21 +16,32 @@
     //  require_once "crearVehiculo.php";
     // require_once "traerVehiculo.php";
 
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+
     $metodo = $_SERVER['REQUEST_METHOD'];
     echo $metodo . "<br>";
     switch ($metodo) {
         case "GET":
-            if ($_GET["quehacer"] == "traerTodos") {
-
-                echo "algo algo";
+            switch (key($_GET)) {
+                case 'estacionados':
+                    echo "estacioname esta";
+                    Estacionamiento::MostrarEstacionas();
+                    break;
+                case "facturados":
+                    echo "facturame esta";
+                    Estacionamiento::MostrarFacturado();
+                    break;
             }
             break;
-
         case "POST":
-            //echo "lolo" . $_POST["autoIngresado"];
-            echo "SALE: " . $_POST["autoSaliendo"]."\n";
-            Estacionamiento::vehiculoEstacionado($_POST["autoIngresado"]);
-            Estacionamiento::removervehiculoEstacionado($_POST["autoSaliendo"]);
+            switch (key($_POST)) {
+                case 'autoIngresado':
+                    Estacionamiento::vehiculoEstacionado($_POST["autoIngresado"]);
+                    break;
+                case "autoSaliendo":
+                    Estacionamiento::removervehiculoEstacionado($_POST["autoSaliendo"]);
+                    break;
+            }
             break;
 
         case "DELETE":

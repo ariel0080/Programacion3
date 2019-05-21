@@ -38,6 +38,11 @@ class Vehiculo
         return $this->patente;
     }
 
+    public function getImporte()
+    {
+        return $this->importePago;
+    }
+
     
     public function setImporte()
     {

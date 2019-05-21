@@ -65,7 +65,8 @@ class Vehiculo
         array_push($arrayAux, $this->patente);
         array_push($arrayAux, $this->ingreso);
         array_push($arrayAux, $this->importePago);
-
+        array_push($arrayAux, "\n");
+        
         return $arrayAux;
     }
 

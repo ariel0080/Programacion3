@@ -1,9 +1,33 @@
 {
     "patente": "BLG003",
-    "fecha": "10:05",
+    "fecha": "03:05",
+    "precio": 0
+},{
+    "patente": "BLG011",
+    "fecha": "03:05",
     "precio": 0
 },{
     "patente": "BLG001",
-    "fecha": "10:05",
+    "fecha": "03:05",
+    "precio": 0
+},{
+    "patente": "BLG002",
+    "fecha": "03:05",
+    "precio": 0
+},{
+    "patente": "BLG004",
+    "fecha": "03:05",
+    "precio": 0
+},{
+    "patente": "BLG005",
+    "fecha": "03:05",
+    "precio": 0
+},{
+    "patente": "BLG007",
+    "fecha": "03:05",
+    "precio": 0
+},{
+    "patente": "ggg222",
+    "fecha": "03:05",
     "precio": 0
 },

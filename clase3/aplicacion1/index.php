@@ -13,25 +13,24 @@
 <body>
     <?php
     require_once 'estacionamiento.php';
-     //  require_once "crearVehiculo.php";
-     // require_once "traerVehiculo.php";
+    //  require_once "crearVehiculo.php";
+    // require_once "traerVehiculo.php";
 
     $metodo = $_SERVER['REQUEST_METHOD'];
     echo $metodo . "<br>";
     switch ($metodo) {
         case "GET":
-            if ($_GET["quehacer"] == "traerTodos") 
-            {
+            if ($_GET["quehacer"] == "traerTodos") {
 
                 echo "algo algo";
             }
             break;
 
         case "POST":
-            echo "lolo".$_POST["autoIngresado"];
-            echo "lolo".$_POST["autoSaliendo"];
+            //echo "lolo" . $_POST["autoIngresado"];
+            echo "SALE: " . $_POST["autoSaliendo"]."\n";
             Estacionamiento::vehiculoEstacionado($_POST["autoIngresado"]);
-            //Estacionamiento::removervehiculoEstacionado($_POST["autoSaliendo"]);
+            Estacionamiento::removervehiculoEstacionado($_POST["autoSaliendo"]);
             break;
 
         case "DELETE":

@@ -33,13 +33,20 @@ class Vehiculo
         return $listadoVehiculos;
     }
 
-
-
     public function getPatente()
     {
         return $this->patente;
     }
 
+    
+    public function setImporte()
+    {
+       $this->importePago = (date("h:m")-$this->ingreso)*15;
+    }
+
+
+
+    
 
     public function MostrarAuto()
     {

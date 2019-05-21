@@ -19,10 +19,6 @@ class Estacionamiento
 
     //#region Archivos json
 
-    /**
-     *
-     *
-     */
     public static function LeerJSON($nombreArchivo)
     {
         $listadoVehiculos = array();
@@ -63,10 +59,6 @@ class Estacionamiento
         return $listadoVehiculos;
     }
 
-    //#endregion
-
-
-    //#region Archivos csv txt
     public static function Leer($formato, $nombreArchivo)
     {
         $listadoVehiculos = array();
@@ -93,6 +85,7 @@ class Estacionamiento
         fclose($archivo);
         return $listadoVehiculos;
     }
+
 
     public static function agregarVehiculosEstacionamiento($lista, $vehiculoAgregar, $formato, $nombreArchivo)
     {
@@ -166,27 +159,31 @@ class Estacionamiento
             Estacionamiento::guardarVehiculosEstacionamiento($listadoVehiculo, "txt", "estacionamiento");
             Estacionamiento::guardarVehiculosEstacionamiento($listadoVehiculo, "csv", "estacionamiento");
             Estacionamiento::guardarVehiculosEstacionamientoJson($listadoVehiculo, "estacionamiento");
-           
         }
     }
 
     public static function removervehiculoEstacionado($patent)
     {
         $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
-
-        $auto = Estacionamiento::estaEstacionado($patent, $listadoVehiculo);
-
-        $auto->MostrarAuto();
-
+        $auto = Estacionamiento::estaEstacionadoKey($patent, $listadoVehiculo);
+        echo ' <br><br><br> el auto esta en: '.$auto;
+      //  $listadoVehiculo[$auto]->MostrarAuto();
         if ($auto != null) {
-            unset($listadoVehiculo, $auto);
+            echo " <br> el auto se encuntra en el estacionamiento <br> ";
+            $listadoFacturado = Estacionamiento::Leer("csv", "facturado");
+            $listadoVehiculo[$auto]->setImporte();
+            array_push( $listadoFacturado, $listadoVehiculo[$auto]);
+            echo '<pre>', var_dump( $listadoFacturado), '</pre>';
+            Estacionamiento::guardarVehiculosEstacionamiento($listadoFacturado, "csv", "facturado");
+            
+            
+            unset($listadoVehiculo[$auto]);
+            
             Estacionamiento::guardarVehiculosEstacionamiento($listadoVehiculo, "csv", "estacionamiento");
             Estacionamiento::guardarVehiculosEstacionamiento($listadoVehiculo, "txt", "estacionamiento");
-            Estacionamiento::agregarVehiculosEstacionamientoJson($listadoVehiculo, "estacionamiento");
-            echo "deberia haber borrado el auto";
-
-            $auto->setImporte();
-            Estacionamiento::agregarVehiculosEstacionamiento($listadoVehiculo, $auto, "csv", "facturado");
+            Estacionamiento::guardarVehiculosEstacionamientoJson($listadoVehiculo, "estacionamiento");
+            echo "deberia haber guardado sin el auto borrado";
+            
         }
     }
 
@@ -196,6 +193,17 @@ class Estacionamiento
             if ($auto->getPatente() == $patent) {
                 echo "Esta en el estacionamiento";
                 return $auto;
+                break;
+            }
+        }
+        return null;
+    }
+    public static function estaEstacionadoKey($patent, $listadoVehiculo)
+    {
+        foreach ($listadoVehiculo as $key => $auto) {
+            if ($auto->getPatente() == $patent) {
+                echo "Esta en el estacionamiento";
+                return $key;
                 break;
             }
         }

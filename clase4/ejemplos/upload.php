@@ -89,9 +89,6 @@ if ($uploadOk === FALSE) {
 	if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $destino))
 	{
 		MarcadeAgua::hacerMarca($destino);
-
-
-
         echo "<br/>El archivo ". basename( $_FILES["archivo"]["name"]). " ha sido subido exitosamente.";
     } else {
         echo "<br/>Lamentablemente ocurri&oacute; un error y no se pudo subir el archivo.";

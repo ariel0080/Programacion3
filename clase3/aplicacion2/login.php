@@ -53,7 +53,7 @@ class LogIn
           {
               if (!($key->getAlias() == '' || $key->getAlias() == '\n'))
               {
-                  $array = array('alias' => $key->getAlias(), 'clave' => $key->getClave(),                  'fecha' => $key->getFecha()), 'mail' => $key->getMail() );
+                  $array = array('alias' => $key->getAlias(), 'clave' => $key->getClave(),'fecha' => $key->getFecha(), 'mail' => $key->getMail() );
                   fputs($archivo,  json_encode($array, JSON_PRETTY_PRINT) . ',');
               }
           }

@@ -1,0 +1,107 @@
+COMPOSER
+
+
+
+Alta -> insert
+Baja -> delete (where) NO OLVIDAR 
+Modificacion -> update (where)
+
+Select campoDelFiltro
+from elNombreDeLaTabla
+where dondeSeCumpleCondicion
+->relacion
+
+
+INSERT INTO ( QUE CAMPOS)
+VALUE (ARRAY DE ELEMETOS),(MAS PARAMETROS),( Y MAS)
+
+LOCALIDAD
+
+INSERT INTO `localidad`('descripcion')
+VALUES('quilmes'),('lanus'),('capital')
+
+INSERT INTO `alumnos`(`nombre`, `legajo`, `id_localidad`) 
+VALUES ('lolo','111',1),('lala','111',1), ('lolo','111',2),('lala','111',2),('lolo','111',3),('lala','111',3)
+
+INSERT INTO `materia`(`descripcion`)
+VALUES('Estadistica'),('Programacion'),('Laboratorio')
+
+
+
+UPDATE `alumnos` SET `nombre` = "jose" WHERE `id` = 3 //cambio el nombre del id 3 al nombre jose
+UPDATE `alumnos` SET `nombre` = "maria" WHERE `nombre` = "jose" //cambio el nombre jose a Maria
+
+ deleteeeeeeeeeee
+
+DELETE FROM `alumnos` WHERE `id` != 6
+DELETE FROM `alumnos` WHERE `id` <> 6
+
+
+INSERT INTO `alumno_materia`( `id_alumno`, `id_materia`,  `nota`) 
+VALUES (6,1,5), (6,2,6),(6,3,7), (10,2,10), (10,3,5), (8,3,2),(7, 2, 25),(12, 1, 102)
+
+CUENTA CUANTO LINEAS HAY
+SELECT COUNT(*) FROM `alumno_materia`
+
+
+SELECT COUNT(*) AS "cantidad de examenes" FROM `alumno_materia`
+
+SELECT COUNT(*) AS "Cantidad Aprobados" FROM `alumno_materia` WHERE nota >= 6
+
+
+SELECT SUM(*) AS "Suma de Notas" FROM `alumno_materia`
+
+SELECT SUM(nota) AS "Suma de Notas" FROM `alumno_materia`
+
+SELECT A.nombre, AM.nota FROM `alumnos` AS A, `alumno_materia` AS AM
+SELECT A.nombre, AM.nota , M.descri FROM `alumnos` AS A, `alumno_materia`,`materias` as M  AS AM WHERE A.id = AM.id_alumno
+
+
+MOSTRAR FILTRO
+SELECT
+    A.nombre,
+    AM.nota,
+    M.descripcion
+FROM
+    alumnos AS A,
+    alumno_materia AS AM,
+    materia AS M
+WHERE
+    A.id = AM.id_alumno AND AM.id_materia = M.id
+
+BUSCAR BEWTEN
+
+LIKE
+
+SELECT
+    A.nombre,
+    AM.nota,
+    M.descripcion
+FROM
+    alumnos AS A,
+    alumno_materia AS AM,
+    materia AS M
+WHERE
+    A.id = AM.id_alumno AND AM.id_materia = M.id
+    AND A.nombre like 'p%'
+
+
+SELECT A.id FROM alumnos AS A, alumno_materia AS AM, materia AS M WHERE A.id = AM.id_alumno AND AM.id_materia = M.id
+SELECT DISTINCT  //no repite
+    A.id 
+FROM 
+    alumnos AS A, 
+    alumno_materia AS AM,
+    materia AS M 
+WHERE
+    A.id = AM.id_alumno 
+    AND AM.id_materia = M.id
+
+
+SELECT nombre, id FROM alumnos as A WHERE id NOT IN
+( 
+SELECT DISTINCT A.id 
+FROM alumnos AS A, alumno_materia AS AM, materia AS M 
+WHERE A.id = AM.id_alumno AND AM.id_materia = M.id 
+ORDER by A.id
+)

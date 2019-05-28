@@ -14,9 +14,7 @@
     <?php
     require_once 'estacionamiento.php';
     require_once "../recursos/upload.php";
-    //  require_once "crearVehiculo.php";
-    // require_once "traerVehiculo.php";
-
+    
     date_default_timezone_set('America/Argentina/Buenos_Aires');
 
     $metodo = $_SERVER['REQUEST_METHOD'];
@@ -25,11 +23,8 @@
         case "GET":
             switch (key($_GET)) {
                 case 'estacionados':
-                    echo "estacioname esta";
                     Estacionamiento::MostrarEstacionas();
                     break;
-                case "facturados":
-                    echo "facturame esta";
                     Estacionamiento::MostrarFacturado();
                     break;
             }
@@ -37,8 +32,9 @@
         case "POST":
             switch (key($_POST)) {
                 case 'autoIngresado':
-                    Estacionamiento::vehiculoEstacionado($_POST["autoIngresado"] , $_POST["foto"] );
-                   
+
+                echo 'autoIngresado';
+                    Estacionamiento::vehiculoEstacionado($_FILES["foto"], $_POST["autoIngresado"]);        
                     break;
                 case "autoSaliendo":
                     Estacionamiento::removervehiculoEstacionado($_POST["autoSaliendo"]);

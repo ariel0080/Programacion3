@@ -1,73 +1,87 @@
 {
     "patente": "ggg224",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "ggg245",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "ggg244",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "ggg248",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "ggg231",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "ggg230",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "ggg225",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "ggg299",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "ggg298",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "ggg297",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "ggg294",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "FCR678",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "AAA111",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "FFC807",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "FFC808",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "FFC809",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
     "patente": "FFC822",
-    "fecha": "10:05",
+    "fecha": "06:05",
     "precio": 0
 },{
-    "patente": "FFC823\n",
-    "fecha": "10:05",
+    "patente": "FFC823\r\n",
+    "fecha": "06:05",
+    "precio": 0
+},{
+    "patente": "auto (2).png",
+    "fecha": "06:05",
+    "precio": 0
+},{
+    "patente": {
+        "name": "auto (2).png",
+        "type": "image\/png",
+        "tmp_name": "C:\\xampp\\tmp\\phpD108.tmp",
+        "error": 0,
+        "size": 38689
+    },
+    "fecha": "06:05",
     "precio": 0
 },

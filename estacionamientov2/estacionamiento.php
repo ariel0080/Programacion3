@@ -2,7 +2,6 @@
 
 require_once  'Vehiculo.php';
 
-
 class Estacionamiento
 {
     private $nombre;
@@ -145,16 +144,13 @@ class Estacionamiento
     public static function vehiculoEstacionado($patent, $path)
     {
         $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
-        //   $listadoVehiculo = Estacionamiento::Leer("txt");
-
-        // echo "path: $path";
-
         $auto = Estacionamiento::estaEstacionado($patent, $listadoVehiculo);
 
         if ($auto == null) {
 
             $autoNuevo = new Vehiculo($patent, date("h:m"), 0);
-            Upload::cargarImagenPorNombre();
+            echo "cargar imagen";
+            Upload::cargarImagenPorNombre($patent , $path);
             array_push($listadoVehiculo, $autoNuevo);
             //AGREGAR
             //  Estacionamiento::agregarVehiculosEstacionamiento($listadoVehiculo, $autoNuevo, "txt", "estacionamiento");
@@ -165,6 +161,7 @@ class Estacionamiento
             Estacionamiento::guardarVehiculosEstacionamiento($listadoVehiculo, "csv", "estacionamiento");
             Estacionamiento::guardarVehiculosEstacionamientoJson($listadoVehiculo, "estacionamiento");
         }
+    
     }
 
     public static function guardarFoto()

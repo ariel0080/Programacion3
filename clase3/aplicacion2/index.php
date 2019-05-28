@@ -49,8 +49,9 @@ Todas las peticiones HTTP deben ir al index.php -->
         case "POST":
             switch (key($_POST)) {
                 case 'Alta':
-                
-                    break;
+                LogIn::altaUsuario($_POST["alias"], $_POST["clave"], $_POST["mail"]);                
+                break;
+
                 case "Ingreso":
  
                     break;

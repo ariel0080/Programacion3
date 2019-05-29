@@ -141,14 +141,17 @@ class LogIn
   public static function altaUsuario($alia, $pass, $email)
   {
     $listado = self::leerJSON("./archivos/usuarios");
-    if ($listado != null) {
+    $usuarioExiste = self::aliasExisteNombre($alia, $listado);
+
+    if ($usuarioExiste == null) 
+    {
       $usuarioNuevo = new Usuario($alia, $pass, date("Y-m-d h:m"), $email);
       array_push($listado, $usuarioNuevo);
       echo " todo el listado: ";
       var_dump($listado);
       LogIn::guardarJsonListadoArchivo($listado, "./archivos/usuarios");
     } else {
-      echo " <br> no anda <br>";
+      echo " <br> El nombre de ususario ya existe <br>";
     }
   }
 
@@ -181,20 +184,20 @@ class LogIn
     }
   }
 
+
+
+
   public static function modificarUsuario($datoPut)
   {
     $listado = self::leerJSON("./archivos/usuarios");
 
     $arrayDeDatos =  $datoPut;
-    echo "posicion alias".$arrayDeDatos["alias"]."<br>";
+    echo "posicion alias" . $arrayDeDatos["alias"] . "<br>";
 
-    if (isset($arrayDeDatos)) 
-    {
-      foreach ($listado as $value) 
-      {
-        
-        if ($value->getAlias() == $arrayDeDatos["alias"]) 
-        {           
+    if (isset($arrayDeDatos)) {
+      foreach ($listado as $value) {
+
+        if ($value->getAlias() == $arrayDeDatos["alias"]) {
           echo " entro al =";
           $value->setClave($arrayDeDatos["clave"]);
           LogIn::guardarJsonListadoArchivo($listado, "./archivos/usuarios");
@@ -202,13 +205,50 @@ class LogIn
         }
       }
     }
+  }
 
+  public static function removerUsuario($aliass)
+  {
+    $listado = self::leerJSON("./archivos/usuarios");
+    $usuario = self::aliasExiste($aliass["alias"], $listado);
+
+    if ($usuario >-1)     
+    {
+      echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br><br><br><br> el usuario existe <br> </font>";
+      unset($listado[$usuario]);
+      LogIn::guardarJsonListadoArchivo($listado, "./archivos/usuarios");
+    } else {
+      echo "<font size='3' color='red'  face='verdana' style='font-weight:bold' <br><br><br><br>EL USUARIO NO EXISTE <br> </font>";
+    }
   }
 
 
 
 
   ///////////BUSCARES
+  public static function aliasExiste($aliass, $listado)
+  {
+    foreach ($listado as $key => $usuario) {
+      if ($usuario->getAlias() == $aliass) {
+        echo "<p>ALIAS existe</p>";
+        return $key;
+        break;
+      }
+    }
+    return null;
+  }
+
+  public static function aliasExisteNombre($aliass, $listado)
+  {
+    foreach ($listado as  $usuario) {
+      if ($usuario->getAlias() == $aliass) {
+        echo "<p>ALIAS ya existe</p>";
+        return $usuario;
+        break;
+      }
+    }
+    return null;
+  }
   public static function estaEnArray($aliass, $pass, $listado)
   {
     foreach ($listado as $usuario) {

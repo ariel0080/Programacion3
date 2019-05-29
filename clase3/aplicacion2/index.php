@@ -63,13 +63,14 @@ Todas las peticiones HTTP deben ir al index.php -->
 
         case "DELETE":
             echo "se recibe el id del usuario y se borra";
+            parse_str(file_get_contents('php://input'), $request_params);
+            LogIn::removerUsuario($request_params);
             break;
 
         case "PUT":
             echo "se modifican los datos del usuario , (clave y alias)";
             parse_str(file_get_contents("php://input"), $_PUT);
-            var_dump($_PUT);
-             LogIn::modificarUsuario($_PUT);
+            LogIn::modificarUsuario($_PUT);
             break;
     }     ?>
 

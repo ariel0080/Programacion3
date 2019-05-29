@@ -13,7 +13,7 @@
 <body>
     <?php
     require_once 'estacionamiento.php';
-    require_once "../recursos/upload.php";
+    require_once "./recursos/upload.php";
     
     date_default_timezone_set('America/Argentina/Buenos_Aires');
 
@@ -32,10 +32,11 @@
         case "POST":
             switch (key($_POST)) {
                 case 'autoIngresado':
-                echo 'autoIngresado';
+                echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>Alta de Auto por POST (con imagen) <br> </font>";
                     Estacionamiento::vehiculoEstacionado($_FILES["foto"], $_POST["autoIngresado"]);        
                     break;
                 case "autoSaliendo":
+                echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>Baja de Auto por POST y facturado <br> </font>";
                     Estacionamiento::removervehiculoEstacionado($_POST["autoSaliendo"]);
                     break;
             }

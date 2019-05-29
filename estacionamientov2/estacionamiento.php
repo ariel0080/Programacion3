@@ -74,9 +74,11 @@ class Estacionamiento
 
             $arrayDeDatos = explode(',', $renglon);
 
-            $auto = new Vehiculo($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2]);
-
-            array_push($listadoVehiculos, $auto);
+            if (isset($arrayDeDatos[0]) && isset($arrayDeDatos[1]) && isset($arrayDeDatos[2]))
+            {
+                $auto = new Vehiculo($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2]);
+                array_push($listadoVehiculos, $auto);
+            }
         }
 
         fclose($archivo);
@@ -137,7 +139,7 @@ class Estacionamiento
 
 
     //#region Funciones
-      public static function vehiculoEstacionado($foto, $patent)
+    public static function vehiculoEstacionado($foto, $patent)
     {
         $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
         $auto = Estacionamiento::estaEstacionado($patent, $listadoVehiculo);
@@ -145,8 +147,7 @@ class Estacionamiento
         if ($auto == null) {
 
             $autoNuevo = new Vehiculo($patent, date("h:m"), 0);
-            echo "cargar imagen";
-            Upload::cargarImagenPorNombre($foto , $patent);
+            Upload::cargarImagenPorNombre($foto, $patent);
             array_push($listadoVehiculo, $autoNuevo);
             //AGREGAR
             //  Estacionamiento::agregarVehiculosEstacionamiento($listadoVehiculo, $autoNuevo, "txt", "estacionamiento");
@@ -157,7 +158,6 @@ class Estacionamiento
             Estacionamiento::guardarVehiculosEstacionamiento($listadoVehiculo, "csv", "estacionamiento");
             Estacionamiento::guardarVehiculosEstacionamientoJson($listadoVehiculo, "estacionamiento");
         }
-    
     }
 
 
@@ -192,23 +192,28 @@ class Estacionamiento
     {
         $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
         $auto = Estacionamiento::estaEstacionadoKey($foto, $listadoVehiculo);
-        echo ' <br><br><br> el auto esta en: ' . $auto;
-        //  $listadoVehiculo[$auto]->MostrarAuto();
-        if ($auto != null) {
-            echo " <br> el auto se encuntra en el estacionamiento <br> ";
+        
+        if ($auto >-1) 
+        {
+            echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br><br><br><br> el auto esta en: ' . $auto <br> </font>";
+          
             $listadoFacturado = Estacionamiento::Leer("csv", "facturado");
             $listadoVehiculo[$auto]->setImporte();
+           
             array_push($listadoFacturado, $listadoVehiculo[$auto]);
             echo '<pre>', var_dump($listadoFacturado), '</pre>';
             Estacionamiento::guardarVehiculosEstacionamiento($listadoFacturado, "csv", "facturado");
-
-
+                        
             unset($listadoVehiculo[$auto]);
-
+            
             Estacionamiento::guardarVehiculosEstacionamiento($listadoVehiculo, "csv", "estacionamiento");
             Estacionamiento::guardarVehiculosEstacionamiento($listadoVehiculo, "txt", "estacionamiento");
             Estacionamiento::guardarVehiculosEstacionamientoJson($listadoVehiculo, "estacionamiento");
-            echo "deberia haber guardado sin el auto borrado";
+
+        }
+        
+        else{
+            echo "<font size='3' color='red'  face='verdana' style='font-weight:bold' <br><br><br><br> el auto NO esta en ESTACIONAMIENTO <br> </font>";
         }
     }
 
@@ -216,7 +221,7 @@ class Estacionamiento
     {
         foreach ($listadoVehiculo as $auto) {
             if ($auto->getPatente() == $foto) {
-                echo "Esta en el estacionamiento";
+                echo "<font size='3' color='red'  face='verdana' style='font-weight:bold' <br>Este Auto ya se Encuentra en el Estacionamiento <br> </font>";
                 return $auto;
                 break;
             }
@@ -227,7 +232,7 @@ class Estacionamiento
     {
         foreach ($listadoVehiculo as $key => $auto) {
             if ($auto->getPatente() == $foto) {
-                echo "Esta en el estacionamiento";
+                echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>Este Auto se encuentra en el Estacionamiento <br> </font>";
                 return $key;
                 break;
             }

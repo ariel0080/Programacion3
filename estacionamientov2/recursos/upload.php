@@ -6,7 +6,7 @@ require_once 'MarcaDeAgua.php';
 class Upload
 {
 
-	public function cargarImagenPorNombre($nombreArchivo, $nombre, $carpetaDestino = "../estacionamientov2/archivos/")
+	public function cargarImagenPorNombre($nombreArchivo, $nombre, $carpetaDestino = "./archivos/")
 	{
 		//INDICO CUAL SERA EL DESTINO DEL ARCHIVO SUBIDO
 		$destino = $carpetaDestino . $nombreArchivo["name"];
@@ -90,7 +90,7 @@ class Upload
 			//MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
 			if (move_uploaded_file($nombreArchivo["tmp_name"], $destino))
 			{
-				MarcadeAgua::hacerMarca($destino, "../estacionamientov2/firma.png");
+				MarcadeAgua::hacerMarca($destino, "./firma.png");
 				echo "<br/>El archivo " . basename($nombreArchivo) . " <h1>ha sido subido exitosamente.</h1>";
 			} 
 			else {

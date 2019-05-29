@@ -161,17 +161,6 @@ class Estacionamiento
     
     }
 
-    public static function guardarFoto()
-    {
-        $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
-
-        foreach ($listadoVehiculo as $key => $auto) {
-            if ($auto->getPatente() != '') {
-                $auto->MostrarAuto();
-                echo "<br>";
-            }
-        }
-    }
 
     public static function MostrarEstacionas()
     {

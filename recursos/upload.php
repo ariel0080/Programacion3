@@ -3,14 +3,13 @@
 require_once 'ManejadoArchivo.php';
 require_once 'MarcaDeAgua.php';
 
-
 class Upload
 {
 
-	public function cargarImagenPorNombre($nombreArchivo , $nombre)
+	public function cargarImagenPorNombre($nombreArchivo, $nombre, $carpetaDestino = "../estacionamientov2/archivos/")
 	{
 		//INDICO CUAL SERA EL DESTINO DEL ARCHIVO SUBIDO
-		$destino = "./archivos/" . $nombreArchivo["name"] ;
+		$destino = $carpetaDestino . $nombreArchivo["name"];
 		/*
 		// VERSION LULOOP-PONTI
 
@@ -28,7 +27,7 @@ class Upload
 
 		if (isset($nombre)) {
 			$tipoArchivo = pathinfo($destino, PATHINFO_EXTENSION);
-			$destino = "./archivos/" . $nombre . ".$tipoArchivo";
+			$destino = $carpetaDestino . $nombre . ".$tipoArchivo";
 		}
 
 		$uploadOk = TRUE;
@@ -49,7 +48,7 @@ class Upload
 
 		//VERIFICO QUE EL ARCHIVO NO EXISTA
 		if (file_exists($destino)) {
-			$uploadOk = ManejadorArchivo::moverArchivoBackup($nombreArchivo["name"] , $nombre, $destino);
+			$uploadOk = ManejadorArchivo::moverArchivoBackup($nombreArchivo["name"], $nombre, $destino);
 		}
 		//VERIFICO EL TAMA�O MAXIMO QUE PERMITO SUBIR
 		if ($nombreArchivo["size"] > 500000) {
@@ -89,10 +88,12 @@ class Upload
 		} else {
 
 			//MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
-			if (move_uploaded_file($nombreArchivo["tmp_name"], $destino)) {
-				MarcadeAgua::hacerMarca($destino);
-				echo "<br/>El archivo " . basename($nombreArchivo ) . " ha sido subido exitosamente.";
-			} else {
+			if (move_uploaded_file($nombreArchivo["tmp_name"], $destino))
+			{
+				MarcadeAgua::hacerMarca($destino, "../estacionamientov2/firma.png");
+				echo "<br/>El archivo " . basename($nombreArchivo) . " <h1>ha sido subido exitosamente.</h1>";
+			} 
+			else {
 				echo "<br/>Lamentablemente ocurri&oacute; un error y no se pudo subir el archivo.";
 			}
 		}

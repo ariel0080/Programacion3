@@ -137,11 +137,10 @@ class Estacionamiento
 
 
     //#region Funciones
-
-    public static function vehiculoEstacionado($foto, $patent)
+      public static function vehiculoEstacionado($foto, $patent)
     {
         $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
-        $auto = Estacionamiento::estaEstacionado($foto, $listadoVehiculo);
+        $auto = Estacionamiento::estaEstacionado($patent, $listadoVehiculo);
 
         if ($auto == null) {
 

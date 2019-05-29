@@ -7,7 +7,7 @@ class Vehiculo
     private $importePago;
 
 
-    public function __construct($nuevoPatente, $nuevoIngreso, $nuevoImporte=0)
+    public function __construct($nuevoPatente, $nuevoIngreso, $nuevoImporte = 0)
     {
         $this->patente = $nuevoPatente;
         $this->ingreso = $nuevoIngreso;
@@ -43,15 +43,19 @@ class Vehiculo
         return $this->importePago;
     }
 
-    
+
     public function setImporte()
     {
-       $this->importePago = (date("h:m")-$this->ingreso)*15;
+        $to_time = strtotime($this->ingreso);
+        $from_time = strtotime(date("h:m"));
+        $this->importePago = round(abs($to_time - $from_time) / 60, 2) * 15;
+
+        echo "importe a pagar $this->importePago ";
     }
 
 
 
-    
+
 
     public function MostrarAuto()
     {
@@ -65,7 +69,7 @@ class Vehiculo
 
         $aux = implode(',', $vehiculoAgregar->toArray());
 
-        fputs($archivo,  "\n".$aux);
+        fputs($archivo,  "\n" . $aux);
 
         fclose($archivo);
         return $listadoVehiculos;
@@ -78,7 +82,7 @@ class Vehiculo
         array_push($arrayAux, $this->ingreso);
         array_push($arrayAux, $this->importePago);
         array_push($arrayAux, "\n");
-        
+
         return $arrayAux;
     }
 

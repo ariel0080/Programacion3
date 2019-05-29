@@ -50,13 +50,13 @@ Todas las peticiones HTTP deben ir al index.php -->
         case "POST":
             switch (key($_POST)) {
                 case 'Alta':
-                echo "Entro Al CASE de alta";
-                LogIn::altaUsuario($_POST["alias"], $_POST["clave"], $_POST["mail"]);
-                break;
-                
+                    echo "Entro Al CASE de alta";
+                    LogIn::altaUsuario($_POST["alias"], $_POST["clave"], $_POST["mail"]);
+                    break;
+
                 case "Ingreso":
-                echo "Entro Al CASE de LOG";
-                    LogIn:: altaLog($_POST["alias"], $_POST["clave"]);
+                    echo "Entro Al CASE de LOG";
+                    LogIn::altaLog($_POST["alias"], $_POST["clave"]);
                     break;
             }
             break;
@@ -67,6 +67,9 @@ Todas las peticiones HTTP deben ir al index.php -->
 
         case "PUT":
             echo "se modifican los datos del usuario , (clave y alias)";
+            parse_str(file_get_contents("php://input"), $_PUT);
+            var_dump($_PUT);
+             LogIn::modificarUsuario($_PUT);
             break;
     }     ?>
 

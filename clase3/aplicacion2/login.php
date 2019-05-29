@@ -16,7 +16,7 @@ class LogIn
 
   //#endregion
 
-/////////////////////////LEERS
+  /////////////////////////LEERS
   public static function leerJSON($nombreArchivo)
   {
     $ruta = $nombreArchivo . '.json';
@@ -42,37 +42,36 @@ class LogIn
     return null;
   }
 
-  
+
   public static function Leer($formato, $nombreArchivo)
   {
-      $listadoVehiculos = array();
+    $listadoVehiculos = array();
 
-      switch ($formato) {
-          case "csv":
-              $archivo = fopen($nombreArchivo . '.csv', "r");
-              break;
-          case "txt":
-              $archivo = fopen($nombreArchivo . '.txt', "r");
-              break;
+    switch ($formato) {
+      case "csv":
+        $archivo = fopen($nombreArchivo . '.csv', "r");
+        break;
+      case "txt":
+        $archivo = fopen($nombreArchivo . '.txt', "r");
+        break;
+    }
+
+    while (!feof($archivo)) {
+      $renglon = fgets($archivo);
+
+      $arrayDeDatos = explode(',', $renglon);
+
+      if (isset($arrayDeDatos[0]) && isset($arrayDeDatos[1]) && isset($arrayDeDatos[2]) && isset($arrayDeDatos[3])) {
+        $auto = new Usuario($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2], $arrayDeDatos[3]);
+        array_push($listadoVehiculos, $auto);
       }
+    }
 
-      while (!feof($archivo)) {
-          $renglon = fgets($archivo);
-
-          $arrayDeDatos = explode(',', $renglon);
-
-          if (isset($arrayDeDatos[0]) && isset($arrayDeDatos[1]) && isset($arrayDeDatos[2]) && isset($arrayDeDatos[3]))
-          {
-              $auto = new Usuario($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2], $arrayDeDatos[3]);
-              array_push($listadoVehiculos, $auto);
-          }
-      }
-
-      fclose($archivo);
-      return $listadoVehiculos;
+    fclose($archivo);
+    return $listadoVehiculos;
   }
 
-/////////////////////////GUARDARS
+  /////////////////////////GUARDARS
   public static function guardarJsonListadoArchivo($lista, $nombreArchivo)
   {
     $listado = $lista;
@@ -117,15 +116,14 @@ class LogIn
     return $listado;
   }
 
-//////////////////////////// ALTA Y METODOS CON ARCHIVOS
+  //////////////////////////// ALTA Y METODOS CON ARCHIVOS
 
   public static function altaLog($aliass, $pass)
   {
     $listado = self::leerJSON("./archivos/usuarios");
     $usuario = LogIn::estaEnArray($aliass, $pass, $listado);
 
-    if ($usuario != null) 
-    {
+    if ($usuario != null) {
       $logs = LogIn::Leer("csv", "./archivos/log");
       array_push($logs, $usuario);
       //AGREGAR
@@ -156,7 +154,7 @@ class LogIn
 
 
 
-///////////////MOSTRARS
+  ///////////////MOSTRARS
 
   public static function MostrarLogueados()
   {
@@ -183,34 +181,34 @@ class LogIn
     }
   }
 
-  /*   public static function removervehiculoEstacionado($aliass)
+  public static function modificarUsuario($datoPut)
   {
-    $listado = LogIn::Leer("csv", "estacionamiento");
-    $usuario = LogIn::estaEnArrayKey($aliass, $listado);
-    echo ' <br><br><br> el usuario esta en: ' . $usuario;
-    //  $listado[$usuario]->MostrarUsuario();
-    if ($usuario != null) {
-      echo " <br> el auto se encuntra en elLogIn <br> ";
-      $listadoFacturado = LogIn::Leer("csv", "facturado");
-      $listado[$usuario]->setImporte();
-      array_push($listadoFacturado, $listado[$usuario]);
-      echo '<pre>', var_dump($listadoFacturado), '</pre>';
-      LogIn::guardarVehiculosEstacionamiento($listadoFacturado, "csv", "facturado");
+    $listado = self::leerJSON("./archivos/usuarios");
 
+    $arrayDeDatos =  $datoPut;
+    echo "posicion alias".$arrayDeDatos["alias"]."<br>";
 
-      unset($listado[$usuario]);
-
-      LogIn::guardarVehiculosEstacionamiento($listado, "csv", "estacionamiento");
-      LogIn::guardarVehiculosEstacionamiento($listado, "txt", "estacionamiento");
-      LogIn::guardarVehiculosEstacionamientoJson($listado, "estacionamiento");
-      echo "deberia haber guardado sin el auto borrado";
+    if (isset($arrayDeDatos)) 
+    {
+      foreach ($listado as $value) 
+      {
+        
+        if ($value->getAlias() == $arrayDeDatos["alias"]) 
+        {           
+          echo " entro al =";
+          $value->setClave($arrayDeDatos["clave"]);
+          LogIn::guardarJsonListadoArchivo($listado, "./archivos/usuarios");
+          break;
+        }
+      }
     }
+
   }
- */
 
 
 
-///////////BUSCARES
+
+  ///////////BUSCARES
   public static function estaEnArray($aliass, $pass, $listado)
   {
     foreach ($listado as $usuario) {

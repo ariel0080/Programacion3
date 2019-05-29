@@ -10,7 +10,7 @@ class Upload
 	public function cargarImagenPorNombre($nombreArchivo , $nombre)
 	{
 		//INDICO CUAL SERA EL DESTINO DEL ARCHIVO SUBIDO
-		$destino = "archivos/" . $nombreArchivo["name"] ;
+		$destino = "./archivos/" . $nombreArchivo["name"] ;
 		/*
 		// VERSION LULOOP-PONTI
 
@@ -28,7 +28,7 @@ class Upload
 
 		if (isset($nombre)) {
 			$tipoArchivo = pathinfo($destino, PATHINFO_EXTENSION);
-			$destino = "archivos/" . $nombre . ".$tipoArchivo";
+			$destino = "./archivos/" . $nombre . ".$tipoArchivo";
 		}
 
 		$uploadOk = TRUE;

@@ -5,7 +5,7 @@ class MarcadeAgua
     public static function hacerMarca ($fotoUno)
     {
      $im = imagecreatefrompng($fotoUno);
-     $estampa = imagecreatefrompng( "archivos/postman.png" );
+     $estampa = imagecreatefrompng( "./archivos/firma.png" );
 
 
 // Establecer los márgenes para la estampa y obtener el alto/ancho de la imagen de la estampa
@@ -29,6 +29,5 @@ imagepng($im , $fotoUno);
 
 
 }
-
 
 ?>

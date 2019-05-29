@@ -35,10 +35,7 @@ class Estacionamiento
     }
 
     /**
-     *
-     *
-     *
-     *
+
      */
     public static function guardarVehiculosEstacionamientoJson($lista, $nombreArchivo)
     {
@@ -141,16 +138,16 @@ class Estacionamiento
 
     //#region Funciones
 
-    public static function vehiculoEstacionado($patent, $path)
+    public static function vehiculoEstacionado($foto, $patent)
     {
         $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
-        $auto = Estacionamiento::estaEstacionado($patent, $listadoVehiculo);
+        $auto = Estacionamiento::estaEstacionado($foto, $listadoVehiculo);
 
         if ($auto == null) {
 
             $autoNuevo = new Vehiculo($patent, date("h:m"), 0);
             echo "cargar imagen";
-            Upload::cargarImagenPorNombre($patent , $path);
+            Upload::cargarImagenPorNombre($foto , $patent);
             array_push($listadoVehiculo, $autoNuevo);
             //AGREGAR
             //  Estacionamiento::agregarVehiculosEstacionamiento($listadoVehiculo, $autoNuevo, "txt", "estacionamiento");
@@ -203,10 +200,10 @@ class Estacionamiento
         echo " el total facturado fue $acumulador";
     }
 
-    public static function removervehiculoEstacionado($patent)
+    public static function removervehiculoEstacionado($foto)
     {
         $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
-        $auto = Estacionamiento::estaEstacionadoKey($patent, $listadoVehiculo);
+        $auto = Estacionamiento::estaEstacionadoKey($foto, $listadoVehiculo);
         echo ' <br><br><br> el auto esta en: ' . $auto;
         //  $listadoVehiculo[$auto]->MostrarAuto();
         if ($auto != null) {
@@ -227,10 +224,10 @@ class Estacionamiento
         }
     }
 
-    public static function estaEstacionado($patent, $listadoVehiculo)
+    public static function estaEstacionado($foto, $listadoVehiculo)
     {
         foreach ($listadoVehiculo as $auto) {
-            if ($auto->getPatente() == $patent) {
+            if ($auto->getPatente() == $foto) {
                 echo "Esta en el estacionamiento";
                 return $auto;
                 break;
@@ -238,10 +235,10 @@ class Estacionamiento
         }
         return null;
     }
-    public static function estaEstacionadoKey($patent, $listadoVehiculo)
+    public static function estaEstacionadoKey($foto, $listadoVehiculo)
     {
         foreach ($listadoVehiculo as $key => $auto) {
-            if ($auto->getPatente() == $patent) {
+            if ($auto->getPatente() == $foto) {
                 echo "Esta en el estacionamiento";
                 return $key;
                 break;

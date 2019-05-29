@@ -32,7 +32,6 @@
         case "POST":
             switch (key($_POST)) {
                 case 'autoIngresado':
-
                 echo 'autoIngresado';
                     Estacionamiento::vehiculoEstacionado($_FILES["foto"], $_POST["autoIngresado"]);        
                     break;

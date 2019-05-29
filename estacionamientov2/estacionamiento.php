@@ -17,7 +17,7 @@ class Estacionamiento
     //#endregion
 
 
-    //#region Archivos json
+//#region Archivos
 
     public static function LeerJSON($nombreArchivo)
     {
@@ -138,7 +138,7 @@ class Estacionamiento
     //#endregion
 
 
-    //#region Funciones
+//#region Funciones
     public static function vehiculoEstacionado($foto, $patent)
     {
         $listadoVehiculo = Estacionamiento::Leer("csv", "estacionamiento");
@@ -185,7 +185,8 @@ class Estacionamiento
             }
         }
 
-        echo " el total facturado fue $acumulador";
+        echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br> el total facturado fue $acumulador <br> </font>";
+   
     }
 
     public static function removervehiculoEstacionado($foto)
@@ -232,7 +233,7 @@ class Estacionamiento
     {
         foreach ($listadoVehiculo as $key => $auto) {
             if ($auto->getPatente() == $foto) {
-                echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>Este Auto se encuentra en el Estacionamiento <br> </font>";
+                echo "<font size='3' color='green'  face='verdana' style='font-weight:bold' <br>Este Auto se encuentra en el Estacionamiento <br> </font>";
                 return $key;
                 break;
             }

@@ -8,11 +8,11 @@ class Usuario
     private $mail;
 
     //#region Constructores
-    function __construct($alia, $pass, $email)
+    function __construct($alia, $pass, $date, $email)
     {
         $this->alias = $alia;
         $this->clave = $pass;
-        $this->fecha = date("Y-m-d h:m");
+        $this->fecha = $date;
         $this->mail = $email;
     }
     //#endregion
@@ -55,9 +55,9 @@ class Usuario
     //#endregion
 
 
-    
-//#region GETTER SETTERS
-    
+
+    //#region GETTER SETTERS
+
     public function MostrarUsuario()
     {
         echo "alias: $this->alias || clave: $this->clave || Importe: $this->fecha || Importe: $this->mail";
@@ -71,12 +71,12 @@ class Usuario
         array_push($arrayAux, $this->fecha);
         array_push($arrayAux, $this->mail);
         array_push($arrayAux, "\n");
-        
+
         return $arrayAux;
     }
 
 
-//#endregion
+    //#endregion
 
 
 

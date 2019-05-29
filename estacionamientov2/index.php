@@ -25,6 +25,7 @@
                 case 'estacionados':
                     Estacionamiento::MostrarEstacionas();
                     break;
+                case 'facturados':
                     Estacionamiento::MostrarFacturado();
                     break;
             }

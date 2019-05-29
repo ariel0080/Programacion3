@@ -91,7 +91,7 @@ class Upload
 			if (move_uploaded_file($nombreArchivo["tmp_name"], $destino))
 			{
 				MarcadeAgua::hacerMarca($destino, "./firma.png");
-				echo "<br/>El archivo " . basename($nombreArchivo) . " <h1>ha sido subido exitosamente.</h1>";
+				echo "<br/><h1>El archivo " . basename($nombreArchivo) . " ha sido subido exitosamente.</h1>";
 			} 
 			else {
 				echo "<br/>Lamentablemente ocurri&oacute; un error y no se pudo subir el archivo.";

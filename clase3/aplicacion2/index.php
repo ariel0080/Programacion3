@@ -12,7 +12,7 @@
 
 <body>
 
-<!-- 
+    <!-- 
     Aplicación Nº 2 (Usuario-Login)
 caso 1 alta por POST: Se ingresan los siguientes datos del usuario : mail , clave, alias y se
 guarda la fecha tomada del sistema.
@@ -37,23 +37,26 @@ Todas las peticiones HTTP deben ir al index.php -->
         case "GET":
             switch (key($_GET)) {
                 case 'Listado':
-                    echo "estacioname esta";
-                    LogIn::Mostrar();
+                    echo "Mostrar Lista<br>";
+                    LogIn::MostrarTodos();
                     break;
                 case "Log":
-                    echo "facturame esta";
-                    Estacionamiento::MostrarFacturado();
+                    echo "<p>Mostrar Logueados</p>";
+                    LogIn::MostrarLogueados();
                     break;
             }
             break;
+
         case "POST":
             switch (key($_POST)) {
                 case 'Alta':
-                LogIn::altaUsuario($_POST["alias"], $_POST["clave"], $_POST["mail"]);                
+                echo "Entro Al CASE de alta";
+                LogIn::altaUsuario($_POST["alias"], $_POST["clave"], $_POST["mail"]);
                 break;
-
+                
                 case "Ingreso":
- 
+                echo "Entro Al CASE de LOG";
+                    LogIn:: altaLog($_POST["alias"], $_POST["clave"]);
                     break;
             }
             break;

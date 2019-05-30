@@ -24,5 +24,5 @@ INSERT INTO `envios​`(`Numero`, `pNumero`, `Cantidad`) VALUES ([value-1],[valu
 100 3 100
 101 2 55
 101 3 225
-102 1 600
+102 1 600 
 102 3 300

@@ -29,7 +29,8 @@ SELECT * FROM envios a ORDER BY a.pNumero LIMIT 3
 
 6. // no funciono //
 SELECT provedores.nombre, productos.pNombre FROM provedores, productos, envios WHERE provedores.numero = envios.numero AND productos.pNumero = envios.pNumero
-
+OTRA
+SELECT pro.pNombre, prov.Nombre FROM productos AS pro INNER JOIN envios AS en ON pro.pNumero = en.pnumero INNER JOIN provedores AS prov ON en.numero = prov.numero
 ///////////////
 
 7.

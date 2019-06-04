@@ -1,0 +1,11 @@
+patron singletone
+nadie puede llamar al new acceso dato
+PDO sirve para conectarse a muchas basese de datos
+migrar entre bases es mas rapido 
+ejecuta consultas
+-devuelve algo
+-no deuvel nada
+-devuelve un entero
+
+CLASE CD
+por cada una de sus funciones llama a la isntancia de un objeto y ejecuta una fucnonalidad

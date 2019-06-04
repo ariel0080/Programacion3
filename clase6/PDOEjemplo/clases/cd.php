@@ -45,7 +45,9 @@ class cd
 			return $consulta->execute();
 
 	 }
-	 public function ModificarCdParametros()
+	 public function ModificarCdParametros() 
+	 //este tenemos q usar, tiene ecnapsulamiento de parametro
+	 //mas seguro, evito sql inyection 
 	 {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta("

@@ -27,6 +27,10 @@ class AccesoDatos
  
     public static function dameUnObjetoAcceso()
     { 
+            //siempre devuelve el mismo objeto, si no existe lo crea
+            //patron singleton
+            //
+
         if (!isset(self::$ObjetoAccesoDatos)) {          
             self::$ObjetoAccesoDatos = new AccesoDatos(); 
         } 

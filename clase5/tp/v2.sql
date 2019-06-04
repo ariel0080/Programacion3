@@ -28,15 +28,7 @@ SELECT SUM(cantidad) AS 'cantidad total de productos enviados' FROM envios a
 SELECT * FROM envios a ORDER BY a.pNumero LIMIT 3
 
 6. // no funciono //
-SELECT
-    provedores.nombre,
-    producto.pNombre
-FROM
-    provedores provedor,
-    productos producto,
-    envios e
-WHERE
-    provedor.numero = e.numero AND producto.pNumero = e.pNumero;
+SELECT provedores.nombre, productos.pNombre FROM provedores, productos, envios WHERE provedores.numero = envios.numero AND productos.pNumero = envios.pNumero
 
 ///////////////
 
@@ -80,3 +72,9 @@ UPDATE productos SET tamaño = 'Mediano' WHERE tamaño = 'Chico' AND pNumero IN(
 
 16.
 DELETE FROM productos WHERE pNumero = 1
+
+17.
+consulta 
+SELECT * FROM provedores WHERE NOT EXISTS ( SELECT 1 FROM envios WHERE envios.numero = provedores.numero )
+DELETE FROM provedores WHERE NOT EXISTS ( SELECT 1 FROM envios WHERE envios.numero = provedores.numero )
+

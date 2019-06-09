@@ -6,7 +6,7 @@ require_once 'MarcaDeAgua.php';
 class Upload
 {
 
-	public function cargarImagenPorNombre($nombreArchivo, $nombre, $carpetaDestino = "./archivos/")
+	public function cargarImagenPorNombre($nombreArchivo, $nombre, $carpetaDestino = "./fotosHelados/")
 	{
 		//INDICO CUAL SERA EL DESTINO DEL ARCHIVO SUBIDO
 		$destino = $carpetaDestino . $nombreArchivo["name"];
@@ -51,7 +51,7 @@ class Upload
 			$uploadOk = ManejadorArchivo::moverArchivoBackup($nombreArchivo["name"], $nombre, $destino);
 		}
 		//VERIFICO EL TAMA�O MAXIMO QUE PERMITO SUBIR
-		if ($nombreArchivo["size"] > 500000) {
+		if ($nombreArchivo["size"] > 5000000) {
 			echo "El archivo es demasiado grande. Verifique!!!";
 			$uploadOk = FALSE;
 		}

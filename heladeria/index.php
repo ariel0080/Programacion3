@@ -12,49 +12,58 @@
 
 <body>
     <?php
-    require_once 'estacionamiento.php';
+    require_once './clases/heladeria.php';
     require_once "./recursos/upload.php";
-    
+
     date_default_timezone_set('America/Argentina/Buenos_Aires');
 
     $metodo = $_SERVER['REQUEST_METHOD'];
     echo $metodo . "<br>";
-    switch ($metodo) {
-        case "GET":
+    switch ($metodo) 
+    {
+      case "GET":
             switch (key($_GET)) {
-                case 'estacionados':
-                    Estacionamiento::MostrarEstacionas();
+                case 'consultaHelado':
+                    require_once 'manejadores/2consultarHelado.php';
                     break;
-                case 'facturados':
-                    Estacionamiento::MostrarFacturado();
+                case 'consultaFiltrado':
+                    require_once 'manejadores/5listadoSabor.php';
                     break;
             }
-            break;
+            break; 
+
         case "POST":
             switch (key($_POST)) {
-                case 'autoIngresado':
-                echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>Alta de Auto por POST (con imagen) <br> </font>";
-                    Estacionamiento::vehiculoEstacionado($_FILES["foto"], $_POST["autoIngresado"]);        
+                case 'nuevoHelado':
+                    echo "Alta Helado";
+                    require_once 'manejadores/1heladoCarga.php';
                     break;
-                case "autoSaliendo":
-                echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>Baja de Auto por POST y facturado <br> </font>";
-                    Estacionamiento::removervehiculoEstacionado($_POST["autoSaliendo"]);
+                case 'nuevoHeladoConImagen':
+                    echo "nueva Venta Con Imagen";
+                    require_once 'manejadores/4altaVentaConImagen.php';
+                    break;
+                case 'nuevoVenta':
+                    echo "nuevaVenta";
+                    require_once 'manejadores/3nuevaVenta.php';
+                    break;
+                case 'nuevoVentaConImagen':
+                    echo "nueva Venta Con Imagen";
+                    require_once 'manejadores/4altaVentaConImagen.php';
                     break;
             }
-            break;
-
-            case "DELETE":
-            echo "se recibe el id del usuario y se borra";
-            parse_str(file_get_contents('php://input'), $request_params);
-            LogIn::removerUsuario($request_params);
             break;
 
         case "PUT":
-            echo "se modifican los datos del usuario , (clave y alias)";
-            parse_str(file_get_contents("php://input"), $_PUT);
-            LogIn::modificarUsuario($_PUT);
+            echo "Modificar Helado";
+            require_once 'manejadores/7altaHeladoConFoto.php';
             break;
-    }     ?>
+        case "DELETE":
+            echo "Borrar Helado";
+            require_once 'manejadores/8borrarHelado.php';
+            break;
+    }     
+    
+    ?>
 
 </body>
 

@@ -8,7 +8,7 @@ class Helado
     private $cantidad;
 
     //#region Constructores
-    function __construct($etipo, $esabor, $eprecio, $ecantidad)
+    function __construct($esabor, $etipo, $ecantidad, $eprecio)
     {
         $this->tipo = $etipo;
         $this->sabor = $esabor;
@@ -74,6 +74,6 @@ class Helado
     }
 
 
-//#endregion
+    //#endregion
 
 }

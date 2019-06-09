@@ -1,0 +1,11 @@
+{"sabor":"chocolate","tipo":"agua","precio":"2","cantidad":"100"}
+{"sabor":"chocolate","tipo":"mimi","precio":"150","cantidad":"10"}
+{"sabor":"chocolate","tipo":"aa","precio":"150","cantidad":"10"}
+{"sabor":"chocolate","tipo":"zzz","precio":"150","cantidad":"10"}
+{"sabor":"chocolate","tipo":"zzzz","precio":"150","cantidad":"10"}
+{"sabor":"chocolate","tipo":"zzzzzzz","precio":"150","cantidad":"10"}
+{"sabor":"chocolate","tipo":"cccc","precio":"150","cantidad":"10"}
+{"sabor":"chocolate","tipo":"vvvv","precio":"150","cantidad":"10"}
+{"sabor":"chocolate","tipo":"vvvvvvv","precio":"150","cantidad":"10"}
+{"sabor":"chocolate","tipo":"kkk","precio":"150","cantidad":"10"}
+{"sabor":"chocolate","tipo":"meme","precio":"150","cantidad":"10"}

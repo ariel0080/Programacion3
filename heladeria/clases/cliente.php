@@ -8,7 +8,7 @@ class Cliente
     private $cantidadKg;
 
     //#region Constructores
-    function __construct($ehelado, $enombre, $eprecio, $ecantidadKg)
+    function __construct($ehelado , $enombre , $eprecio, $ecantidadKg)
     {
         $this->helado = $ehelado;
         $this->nombre = $enombre;

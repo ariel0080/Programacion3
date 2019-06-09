@@ -6,7 +6,7 @@ require_once 'MarcaDeAgua.php';
 class Upload
 {
 
-	public function cargarImagenPorNombre($nombreArchivo, $nombre, $carpetaDestino = "./fotosHelados/")
+	public function cargarImagenPorNombre($nombreArchivo, $nombre, $carpetaDestino )
 	{
 		//INDICO CUAL SERA EL DESTINO DEL ARCHIVO SUBIDO
 		$destino = $carpetaDestino . $nombreArchivo["name"];

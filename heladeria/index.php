@@ -13,12 +13,10 @@
 <body>
     <?php
     require_once './clases/heladeria.php';
-    require_once "./recursos/upload.php";
 
     date_default_timezone_set('America/Argentina/Buenos_Aires');
-
+    
     $metodo = $_SERVER['REQUEST_METHOD'];
-    echo $metodo . "<br>";
     switch ($metodo) {
         case "GET":
             switch (key($_GET)) {
@@ -35,39 +33,33 @@
             switch (key($_POST)) {
                 case 'nuevoHelado':
                     if (isset($_FILES["foto"])) {
-                        echo "Alta Helado";
-                        echo "nueva Venta Con Imagen";
                         require_once 'manejadores/7altaHeladoConFoto.php';
                         break;
                     } else {
-                        echo "Alta Helado";
                         require_once 'manejadores/1heladoCarga.php';
                         break;
                     }
                 case 'nuevaVenta':
                     if (isset($_FILES["foto"]))
                     {
-                        echo "nueva Venta Con Imagen";
                         require_once 'manejadores/4altaVentaConImagen.php';
                         break;
                     } 
                     
                     else 
                     {
-                        echo "nuevaVenta";
                         require_once 'manejadores/3nuevaVenta.php';
                         break;
                     }
                     break;
                 }
+                break;
 
                 case "PUT":
-                    echo "Modificar Helado";
                     require_once 'manejadores/6modificarHelado.php';
                     break;
                 case "DELETE":
-                    echo "Borrar Helado";
-                    require_once 'manejadores/8borrarHelado.php';
+                     require_once 'manejadores/8borrarHelado.php';
                     break;
             }
 

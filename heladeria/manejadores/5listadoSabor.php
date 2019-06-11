@@ -9,15 +9,14 @@ TRAER LA FOTO
 echo 
 "<font size='3' color='blue'  
 face='verdana' style='font-weight:bold' 
-<br>CONSULTAR FILTRO <br> </font>";
+<br>CONSULTAR FILTRO VENTAS <br> </font>";
 
 /* if(isset($_GET["consultaFiltro"]))
  echo $_GET["consultaFiltro"]; */
 
  if(isset($_GET["sabor"]) || isset($_GET["tipo"]) )
  {    
-     /* Heladeria::consultarHelado($_GET["sabor"], $_GET["tipo"]); */
-     Heladeria::ListarVendidos($_GET["sabor"], $_GET["tipo"]);
+    Heladeria::ListarVendidos($_GET["sabor"], $_GET["tipo"]);
  }
  else{
      echo "no paso nada";

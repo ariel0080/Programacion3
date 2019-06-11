@@ -1,6 +1,4 @@
-{"nombre":"pedro","helado":"chocolatecrema","precio":750,"cantidadKg":"5"}
-{"nombre":"pedro","helado":"chocolateLOLO","precio":750,"cantidadKg":"5"}
-{"nombre":"pedro","helado":"mentapopo","precio":750,"cantidadKg":"5"}
-{"nombre":"pedro","helado":"mentacrema","precio":750,"cantidadKg":"5"}
-{"nombre":"pedro","helado":"mentacrema","precio":750,"cantidadKg":"5"}
-{"nombre":"pedro","helado":"mentacrema","precio":750,"cantidadKg":"5"}
+{"nombre":"jose","producto":"frutillacrema","precio":300,"cantidadKg":"2"}
+{"nombre":"jose","producto":"frutillacrema","precio":300,"cantidadKg":"2"}
+{"nombre":"jose","producto":"frutillacrema","precio":300,"cantidadKg":"2"}
+{"nombre":"jose","producto":"frutillacrema","precio":300,"cantidadKg":"2"}

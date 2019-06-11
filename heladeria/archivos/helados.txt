@@ -1,4 +1,4 @@
-{"sabor":"vanilla","tipo":"crema","precio":"150","cantidad":"5000"}
-{"sabor":"limon","tipo":"crema","precio":"150","cantidad":"10"}
-{"sabor":"pistacho","tipo":"crema","precio":"150","cantidad":20}
-{"sabor":"menta","tipo":"crema","precio":"150","cantidad":500}
+{"sabor":"vanilla","tipo":"crema","precio":"150","cantidad":"12"}
+{"sabor":"limon","tipo":"crema","precio":"150","cantidad":"5000"}
+{"sabor":"frutilla","tipo":"crema","precio":"150","cantidad":6}
+{"sabor":"coco","tipo":"crema","precio":"150","cantidad":"10"}

@@ -8,6 +8,6 @@ paso todos los datos, modifico precio y kg -->
 parse_str(file_get_contents("php://input"), $_PUT);
 
 var_dump($_PUT);
-    Heladeria::modificarHelado($_PUT);
+    Heladeria::modificarProducto($_PUT);
     echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>MODIFICAR <br> </font>";
 

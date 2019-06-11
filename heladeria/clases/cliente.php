@@ -76,4 +76,39 @@ class Cliente
 
 //#endregion
 
+
+
+
+public static function crearTabla ()
+{
+    $strHtml=self::crearTablaHeader($lista);
+ 
+    foreach ($lista as $objeto) 
+    {
+        if ($objeto->gethelado() == $sabor.$tipo) 
+        {
+            //mostrar venta...
+            $strHtml.= "<tr>";
+            $strHtml.= "<td>".$objeto->gethelado()."</td>";
+            $strHtml.= "<td>".$objeto->getnombre()."</td>";
+            $strHtml.= "<td>".$objeto->getPrecio()."</td>";
+            $strHtml.= "<td>".$objeto->getcantidadKg()."</td>";
+
+            $var = "./fotosHelados/" . $objeto->gethelado() . ".png";                
+            
+            if(file_exists($var))
+            {                 
+                $strHtml.= "<td><img src=" . $var. " alt=" . " border=3 height=30% width=30%></img></td>";
+            }
+            else
+            {// Buscar imagen que diga No Disponible
+                $strHtml.= "<td>"."Imagen NO Disponible"."</td>";
+            }
+        }
+    } 
+    $strHtml.="</tbody>";
+    $strHtml.="</table>";
+    echo $strHtml;
+}
+
 }

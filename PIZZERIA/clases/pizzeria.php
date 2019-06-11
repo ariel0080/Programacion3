@@ -1,26 +1,28 @@
 <?php
 require_once 'cliente.php';
-require_once 'helado.php';
+require_once 'pizza.php';
 require_once "./recursos/upload.php";
 
-define("ARCHIVOHELADO","./archivos/helados.txt",TRUE); 
+define("ARCHIVOPRODUCTO", "./archivos/pizza.txt");
+define("ARCHIVO_FOTO_PRODUCTO", "./fotosPizzas/");
 define("ARCHIVOVENTA","./archivos/ventas.txt",TRUE); 
+define("PRODUCTO", "pizza");
 
 
-class Heladeria
+class Pizzeria
 {
-    private $nombre;
+    /*  private $nombre;
     private $listaHelados;
-    private $listaVentas;
+    private $listaVentas; */
 
 
     //#region Constructores
-    function __construct($nom)
+    /*     function __construct($nom)
     {
         $this->nombre = $nom;
         $this->listaHelados = array();
         $this->listaVentas = array();
-    }
+    } */
 
     //#endregion
 
@@ -47,9 +49,9 @@ class Heladeria
             if (isset($arrayDeDatos)) {
 
                 switch ($tipo) {
-                    case 'helado':
-                        $helado = new Helado($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2], $arrayDeDatos[3]);
-                        array_push($listado, $helado);
+                    case PRODUCTO:
+                        $objeto = new Pizza($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2], $arrayDeDatos[3]);
+                        array_push($listado, $objeto);
                     case 'venta':
                         $cliente = new Cliente($arrayDeDatos[0], $arrayDeDatos[1], $arrayDeDatos[2], $arrayDeDatos[3]);
                         array_push($listado, $cliente);
@@ -75,15 +77,15 @@ class Heladeria
                 if ($renglon != "") {
                     $objeto = json_decode($renglon);
                     switch ($tipo) {
-                        case 'helado':
+                        case PRODUCTO:
                             if (isset($objeto)) {
-                                $helado = new Helado($objeto->sabor, $objeto->tipo,  $objeto->cantidad, $objeto->precio);
-                                array_push($listado, $helado);
+                                $objeto = new Pizza($objeto->sabor, $objeto->tipo,  $objeto->cantidad, $objeto->precio);
+                                array_push($listado, $objeto);
                             }
                             break;
 
                         case 'venta':
-                            $cliente = new Cliente($objeto->helado, $objeto->nombre, $objeto->precio, $objeto->cantidadKg);
+                            $cliente = new Cliente($objeto->producto, $objeto->nombre, $objeto->precio, $objeto->cantidadKg);
                             array_push($listado, $cliente);
                             break;
                     }
@@ -103,16 +105,16 @@ class Heladeria
     /**
 
      */
-    public static function guardarJsonHeladeria($lista, $nombreArchivo, $tipo)
+    public static function guardarJson($lista, $nombreArchivo, $tipo)
     {
         $listado = $lista;
-        echo "<br>-- guardarJsonHeladeria $nombreArchivo --- <br>";
+        echo "<br>-- guardarJson $nombreArchivo --- <br>";
         $archivo = fopen($nombreArchivo, "w");
 
 
         foreach ($listado as $key) {
             switch ($tipo) {
-                case 'helado':
+                case PRODUCTO:
                     if (!($key->getSabor() == '' || $key->getSabor() == '\n')) {
                         $array = array('sabor' => $key->getSabor(), 'tipo' => $key->getTipo(), 'precio' => $key->getPrecio(), 'cantidad' => $key->getCantidad());
                         array_push($listado, $array);
@@ -122,7 +124,7 @@ class Heladeria
                 case 'venta':
                     if (!($key->getnombre() == '' || $key->getnombre() == '\n')) {
 
-                        $array = array('nombre' => $key->getnombre(), 'helado' => $key->gethelado(), 'precio' => $key->getPrecio(), 'cantidadKg' => $key->getcantidadKg());
+                        $array = array('nombre' => $key->getnombre(), 'producto' => $key->getpí(), 'precio' => $key->getPrecio(), 'cantidadKg' => $key->getcantidadKg());
                         array_push($listado, $array);
                         fputs($archivo,  json_encode($array) . PHP_EOL);
                     }
@@ -145,14 +147,14 @@ class Heladeria
         foreach ($lista as $objeto) {
 
             switch ($tipo) {
-                case 'helado':
+                case PRODUCTO:
                     if (!($objeto->getSabor() == '' || $objeto->getSabor() == '\n' || $objeto->getSabor() == ',')) {
                         $aux = implode(',', $objeto->toArray());
                         fputs($archivo,  $aux);
                     }
                     break;
                 case 'venta':
-                    if (!($objeto->getnombre() == '' || $objeto->getnombre() == '\n' || $objeto->getnombre() == ',')) {
+                    if (!($objeto->getNombre() == '' || $objeto->getNombre() == '\n' || $objeto->getnombre() == ',')) {
                         $aux = implode(',', $objeto->toArray());
                         fputs($archivo,  $aux);
                     }
@@ -170,10 +172,10 @@ class Heladeria
         echo $tipo;
 
         switch ($tipo) {
-            case 'helado':
-                $lista = self::LeerJSON( ARCHIVOHELADO , $tipo);
+            case PRODUCTO:
+                $lista = self::LeerJSON(ARCHIVOPRODUCTO, $tipo);
                 foreach ($lista as $objeto) {
-                    $objeto->MostrarHelado();
+                    $objeto->MostrarPizza();
                 }
                 break;
 
@@ -193,7 +195,7 @@ class Heladeria
 
         switch ($tipo) {
             case 'helado':
-                $lista = self::LeerJSON(ARCHIVOHELADO, "helado");
+                $lista = self::LeerJSON("./archivos/helados.txt", "helado");
                 foreach ($lista as $objeto) {
                     $objeto->MostrarHelado();
                 }
@@ -212,16 +214,16 @@ class Heladeria
      * ITEM 3
      */
 
-    public static function consultarHelado($sabor, $tipo)
+    public static function consultarProducto($sabor, $tipo)
     {
         $auxsabor = false;
         $auxtipo = false;
 
-        $lista = Heladeria::LeerJSON(ARCHIVOHELADO, "helado");
+        $lista = Heladeria::LeerJSON(ARCHIVOPRODUCTO, PRODUCTO);
         foreach ($lista as $helado) {
             if ($helado->getSabor() == $sabor) {
                 $auxsabor = true;
-                
+
                 if ($helado->getTipo() == $tipo) {
                     $auxtipo = true;
                 }
@@ -230,96 +232,34 @@ class Heladeria
         }
         if ($auxsabor && $auxtipo) {
             echo " <br> HAY HELADO DE SABOR Y TIPO<br> Cantidad Disponible " . $helado->getCantidad();
-        
-            self::crearTabla($helado); 
+            self::crearTabla($helado);
         } else if ($auxsabor && !$auxtipo) {
             echo "<br> HAY HELADO DE SABOR pero NO TIPO <br> Tipo Disponible: " . $helado->getTipo() . "<br>Cantidad Disponible: " . $helado->getCantidad();
         } else {
             echo "No hay Helado";
         }
-    } 
-
-    public static function ListarVendidos($sabor, $tipo)
-    {
-        $lista=self::LeerJSON(ARCHIVOVENTA, "venta");
-/*      echo "<br> lista ventas <br>";
-        var_dump($lista); */
-        $strHtml=self::crearTablaHeader($lista);
- 
-        foreach ($lista as $objeto) 
-        {
-            if (((strpos($objeto->gethelado(), $sabor) !== false)  || strpos($objeto->gethelado(), $tipo) !== false)) 
-            {
-                //mostrar venta...
-                $strHtml.= "<tr>";
-                $strHtml.= "<td>".$objeto->gethelado()."</td>";
-                $strHtml.= "<td>".$objeto->getnombre()."</td>";
-                $strHtml.= "<td>".$objeto->getPrecio()."</td>";
-                $strHtml.= "<td>".$objeto->getcantidadKg()."</td>";
-
-                $var = "./fotosHelados/" . $objeto->gethelado() . ".png";                
-                
-                if(file_exists($var))
-                {                 
-                    $strHtml.= "<td><img src=" . $var. " alt=" . "border=3 height=30% width=30%></img></td>";
-                }
-                else
-                {// Buscar imagen que diga No Disponible
-                    $strHtml.= "<td>"."Imagen NO Disponible"."</td>";
-                }
-            }
-        } 
-        $strHtml.="</tbody>";
-        $strHtml.="</table>";
-        echo $strHtml;
     }
-    
-    public static function crearTablaHeader($lista)
-    {
-
-        foreach($lista as $key => $objeto)
-        {
-            $strHtml="<table border='1'>";
-            $strCabeceras = reset($lista);
-            $strHtml.="<th>HELADO</th>";
-            $strHtml.="<th>CLIENTE</th>";
-            $strHtml.="<th>PRECIO</th>";
-            $strHtml.="<th>CANTIDAD</th>";
-            $strHtml.="<th>FOTO</th>";
-            $strHtml.="<tbody>";
-            
-            return $strHtml;                    
-        }
-
-
-    }
-
-
-
-
-
-
 
 
     public static function crearTabla($helado)
     {
 
-        $var = "./fotosHelados/" . $helado->getSabor() . $helado->getTipo() . ".png";
+        $var = ARCHIVO_FOTO_PRODUCTO . $helado->getSabor() . $helado->getTipo() . ".png";
         echo "<tr>
                 <table>
                 <tr>
                 <th><img src=" . $var . " alt=" . " border=3 height=30% width=30%></img></th>
                 </tr>                
                 <tr>
-                <th>".$helado->getSabor()."</th>
+                <th>" . $helado->getSabor() . "</th>
                 </tr>                
                 <tr>
-                <th>".$helado->getTipo()."</th>
+                <th>" . $helado->getTipo() . "</th>
                 </tr>                
-                <th>".$helado->getPrecio()."</th>
+                <th>" . $helado->getPrecio() . "</th>
                 </tr>                
                 <tr>
-                <th>".$helado->getCantidad()."</th>
+                <th>" . $helado->getCantidad() . "</th>
                 </tr>                
                 </table> ";
     }
@@ -342,7 +282,7 @@ class Heladeria
             $cantidad = $_PUT["cantidad"];
             $precio = $_PUT["precio"];
 
-            $listaHelados = Heladeria::LeerJSON(ARCHIVOHELADO, "helado");
+            $listaHelados = self::LeerJSON(ARCHIVOPRODUCTO, PRODUCTO);
 
             foreach ($listaHelados as $helado) {
                 if ($helado->getSabor() == $sabor && $helado->getTipo() == $tipo) {
@@ -353,14 +293,14 @@ class Heladeria
                         $helado->setPrecio($precio);
                     }
                     if ($helado->getCantidad() == 0) {
-                        $key = (self::existeHeladoKey($listaHelados, $sabor, $tipo));
+                        $key = (self::existeProductoKey($listaHelados, $sabor, $tipo));
                         echo "<font size='3' color='red' face='verdana' style='font-weight:bold' <br>Archivo Eliminado <br> </font>";
                         unset($listaHelados[$key]);
                     }
                     break;
                 }
             }
-            self::guardarJsonHeladeria($listaHelados, ARCHIVOHELADO, "helado");
+            self::guardarJson($listaHelados, ARCHIVOPRODUCTO, PRODUCTO);
         }
     }
     /**
@@ -374,7 +314,7 @@ class Heladeria
 
     public static function nuevaVenta($sabor, $tipo, $cantidad, $nombre, $foto)
     {
-        $listaHelados = Heladeria::LeerJSON(ARCHIVOHELADO, "helado");
+        $listaHelados = self::LeerJSON(ARCHIVOPRODUCTO, PRODUCTO);
 
         foreach ($listaHelados as $helado) {
             if ($helado->getSabor() == $sabor) {
@@ -396,7 +336,7 @@ class Heladeria
             $helado->setCantidad($helado->getCantidad() - $cantidad);
 
             if ($helado->getCantidad() == 0) {
-                $key = (self::existeHeladoKey($listaHelados, $sabor, $tipo));
+                $key = (self::existeProductoKey($listaHelados, $sabor, $tipo));
                 unset($listaHelados[$key]);
             }
 
@@ -409,8 +349,8 @@ class Heladeria
                 Upload::cargarImagenPorNombre($foto, ("venta$nombre" . date("d-m-y")), "./fotosVentas/");
             }
 
-            self::guardarJsonHeladeria($listaVentas, ARCHIVOVENTA, "venta");
-            self::guardarJsonHeladeria($listaHelados, ARCHIVOHELADO, "helado");
+            self::guardarJson($listaVentas, ARCHIVOVENTA, "venta");
+            self::guardarJson($listaHelados, ARCHIVOPRODUCTO, "helado");
         } else if ($auxsabor && $auxtipo && $helado->getCantidad() < $cantidad) {
             echo " HAY PERO no alcanza";
         } else if ($auxsabor) {
@@ -423,49 +363,39 @@ class Heladeria
     /**
      *
      */
-    public static function agregarHelado($sabor, $tipo, $cantidad, $precio)
+    public static function agregarProducto($sabor, $tipo, $cantidad, $precio, $fotoProducto)
     {
-        $lista = self::LeerJSON(ARCHIVOHELADO, "helado");
-        $helado = self::existeHelado($lista, $sabor, $tipo);
+        $lista = self::LeerJSON(ARCHIVOPRODUCTO, PRODUCTO);
 
-        if ($helado == null) {
+        echo "lista";
+        var_dump($lista);
 
-            $nuevoHelado = new Helado($sabor, $tipo, $cantidad, $precio);
-            array_push($lista, $nuevoHelado);
-        } else {
-            $helado->setCantidad($helado->getCantidad() + $cantidad);
-            echo "la nueva cantidad de helado es " . $helado->getCantidad();
-        }
-        self::guardarJsonHeladeria($lista, ARCHIVOHELADO, "helado");
-    }
 
-    /**
-     *
-     */
-    public static function agregarHeladoConFoto($sabor, $tipo, $cantidad, $precio, $fotoHelado)
-    {
-        $lista = self::LeerJSON(ARCHIVOHELADO, "helado");
-        $helado = self::existeHelado($lista, $sabor, $tipo);
+        $objeto = self::existeProducto($lista, $sabor, $tipo);
 
-        if ($helado == null) {
+        if ($objeto == null) {
 
-            $nuevoHelado = new Helado($sabor, $tipo, $cantidad, $precio);
+            $nuevoHelado = new Pizza($sabor, $tipo, $cantidad, $precio);
 
             echo "nombre archivo ($sabor.$tipo)";
-            var_dump($fotoHelado);
+            var_dump($fotoProducto);
             array_push($lista, $nuevoHelado);
         } else {
-            $helado->setCantidad($helado->getCantidad() + $cantidad);
-            echo "la nueva cantidad de helado es " . $helado->getCantidad();
+            $objeto->setCantidad($objeto->getCantidad() + $cantidad);
+            echo "la nueva cantidad de helado es " . $objeto->getCantidad();
         }
-        Upload::cargarImagenPorNombre($fotoHelado, ($sabor . $tipo), "./fotosHelados/");
-        self::guardarJsonHeladeria($lista, ARCHIVOHELADO, "helado");
+
+        if ($fotoProducto != null) {
+            
+            Upload::cargarImagenPorNombre($fotoProducto, ($sabor . $tipo), ARCHIVO_FOTO_PRODUCTO);
+        }
+        self::guardarJson($lista, ARCHIVOPRODUCTO, PRODUCTO);
     }
 
     /***
      *
      */
-    public static function existeHelado($lista, $sabor, $tipo)
+    public static function existeProducto($lista, $sabor, $tipo)
     {
         $retorno = null;
         foreach ($lista as $helado) {
@@ -481,7 +411,7 @@ class Heladeria
      *
      */
 
-    public static function existeHeladoKey($lista, $sabor, $tipo)
+    public static function existeProductoKey($lista, $sabor, $tipo)
     {
         $retorno = null;
         foreach ($lista as $key => $helado) {

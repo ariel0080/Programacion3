@@ -4,8 +4,9 @@ require_once 'pizza.php';
 require_once "./recursos/upload.php";
 
 define("ARCHIVOPRODUCTO", "./archivos/Pizza.txt");
-define("ARCHIVO_FOTO_PRODUCTO", "./fotosPizzas/");
-define("ARCHIVOVENTA","./archivos/ventas.txt",TRUE); 
+define("ARCHIVO_FOTO_PRODUCTO", "./ImagenesDePizzas/");
+define("ARCHIVO_FOTO_VENTA", "./ImagenesVentas/");
+define("ARCHIVOVENTA", "./archivos/ventas.txt", TRUE);
 define("PRODUCTO", "pizza");
 
 
@@ -79,17 +80,17 @@ class Pizzeria
                     switch ($tipo) {
                         case PRODUCTO:
                             if (isset($objeto)) {
-                                $objeto = new Pizza($objeto->sabor, $objeto->tipo,  $objeto->cantidad, $objeto->precio , $objeto->id);
-                    /*             echo "objeto";
+                                $objeto = new Pizza($objeto->sabor, $objeto->tipo,  $objeto->cantidad, $objeto->precio, $objeto->id);
+                                /*             echo "objeto";
                                 var_dump($objeto);
                                  */
-                                
+
                                 array_push($listado, $objeto);
                             }
                             break;
 
                         case 'venta':
-                            $cliente = new Cliente($objeto->producto, $objeto->nombre, $objeto->precio, $objeto->cantidadKg);
+                            $cliente = new Cliente($objeto->producto, $objeto->mail, $objeto->precio, $objeto->cantidadKg);
                             array_push($listado, $cliente);
                             break;
                     }
@@ -119,19 +120,18 @@ class Pizzeria
         foreach ($listado as $key) {
             switch ($tipo) {
                 case PRODUCTO:
-                    /* if (!($key->getId() == '' || $key->getId() == '\n'))  */{
-                        $array = array('id' => $key->getId(),'sabor' => $key->getSabor(), 'tipo' => $key->getTipo(), 'precio' => $key->getPrecio(), 'cantidad' => $key->getCantidad());
-                        array_push($listado, $array);
-                        fputs($archivo,  json_encode($array) . PHP_EOL);
-                    }
+
+                    $array = array('id' => $key->getId(), 'sabor' => $key->getSabor(), 'tipo' => $key->getTipo(), 'precio' => $key->getPrecio(), 'cantidad' => $key->getCantidad());
+                    array_push($listado, $array);
+                    fputs($archivo,  json_encode($array) . PHP_EOL);
+
                     break;
                 case 'venta':
-                    if (!($key->getnombre() == '' || $key->getnombre() == '\n')) {
 
-                        $array = array('nombre' => $key->getnombre(), 'producto' => $key->getpí(), 'precio' => $key->getPrecio(), 'cantidadKg' => $key->getcantidadKg());
-                        array_push($listado, $array);
-                        fputs($archivo,  json_encode($array) . PHP_EOL);
-                    }
+                    $array = array('mail' => $key->getnombre(), 'producto' => $key->getProducto(), 'precio' => $key->getPrecio(), 'cantidadKg' => $key->getCantidad());
+                    array_push($listado, $array);
+                    fputs($archivo,  json_encode($array) . PHP_EOL);
+
                     break;
             }
         }
@@ -233,11 +233,11 @@ class Pizzeria
                     $auxtipo = true;
                 }
             }
-          /*   self::crearTabla($helado); */
+            /*   self::crearTabla($helado); */
         }
         if ($auxsabor && $auxtipo) {
             echo " <br> HAY pizza DE SABOR Y TIPO<br> Cantidad Disponible " . $helado->getCantidad();
-         /*    self::crearTabla($helado); */
+            /*    self::crearTabla($helado); */
         } else if ($auxsabor && !$auxtipo) {
             echo "<br> HAY pizza DE SABOR pero NO TIPO <br> Tipo Disponible: " . $helado->getTipo() . "<br>Cantidad Disponible: " . $helado->getCantidad();
         } else {
@@ -278,6 +278,48 @@ class Pizzeria
      * ITEM 4
      */
 
+
+    public static function modificarProducto($_PUT, $delete)
+    {
+        $resp = false;
+
+        if (isset($_PUT)) {
+            $sabor  = $_PUT["sabor"];
+            $tipo = $_PUT["tipo"];
+            $cantidad = $_PUT["cantidad"];
+            $precio = $_PUT["precio"];
+
+            $listaHelados = Pizzeria::LeerJSON(ARCHIVOPRODUCTO, PRODUCTO);
+
+            foreach ($listaHelados as $helado) {
+                if ($helado->getSabor() == $sabor && $helado->getTipo() == $tipo) {
+
+                    $helado->setCantidad($helado->getCantidad() + $cantidad);
+
+                    if ($precio != null) {
+                        $helado->setPrecio($precio);
+                    }
+
+                    if ($delete == true) {
+                        $helado->setCantidad(0);
+                    }
+
+                    echo "<font size='3' color='blue' face='verdana' style='font-weight:bold' <br>pizaa Modificado <br> </font>";
+                    if ($helado->getCantidad() == 0) {
+                        $key = (self::existeProductoKey($listaHelados, $sabor, $tipo));
+                        echo "<font size='3' color='red' face='verdana' style='font-weight:bold' <br>pizza Eliminado <br> </font>";
+                        unset($listaHelados[$key]);
+                        $resp = true;
+                    }
+                    break;
+                }
+            }
+            self::guardarJson($listaHelados, ARCHIVOPRODUCTO, PRODUCTO);
+        }
+        return $resp;
+    }
+
+
     public static function modificarHelado($_PUT)
     {
 
@@ -317,7 +359,7 @@ class Pizzeria
      * ITEM 4
      */
 
-    public static function nuevaVenta($sabor, $tipo, $cantidad, $nombre, $foto)
+    public static function nuevaVenta($sabor, $tipo, $cantidad, $email, $foto)
     {
         $listaHelados = self::LeerJSON(ARCHIVOPRODUCTO, PRODUCTO);
 
@@ -336,26 +378,29 @@ class Pizzeria
             if ($listaVentas == null) {
                 $listaVentas = array();
             }
-            echo " <br> HAY HELADO DE SABOR Y TIPO<br> Cantidad Disponible " . $helado->getCantidad();
+            echo " <br> HAY PIZZA DE SABOR Y TIPO<br> Cantidad Disponible " . $helado->getCantidad();
 
             $helado->setCantidad($helado->getCantidad() - $cantidad);
 
-            if ($helado->getCantidad() == 0) {
+            /*     if ($helado->getCantidad() == 0) {
                 $key = (self::existeProductoKey($listaHelados, $sabor, $tipo));
                 unset($listaHelados[$key]);
-            }
+            } */
 
             echo " <br> NUEVA Cantidad Disponible " . $helado->getCantidad() . " <br>";
 
-            $cliente = new Cliente(($helado->getSabor() . $helado->getTipo()), $nombre, ($helado->getPrecio() * $cantidad), $cantidad);
+            $cliente = new Cliente(($helado->getSabor() . $helado->getTipo()), $email, ($helado->getPrecio() * $cantidad), $cantidad);
             array_push($listaVentas, $cliente);
 
             if ($foto != null) {
-                Upload::cargarImagenPorNombre($foto, ("venta$nombre" . date("d-m-y")), "./fotosVentas/");
+
+                $arrayDeDatos = explode('@', $email);
+
+                Upload::cargarImagenPorNombre($foto, ($arrayDeDatos[0] . date("d-m-y")), ARCHIVO_FOTO_VENTA);
             }
 
             self::guardarJson($listaVentas, ARCHIVOVENTA, "venta");
-            self::guardarJson($listaHelados, ARCHIVOPRODUCTO, "helado");
+            self::guardarJson($listaHelados, ARCHIVOPRODUCTO, PRODUCTO);
         } else if ($auxsabor && $auxtipo && $helado->getCantidad() < $cantidad) {
             echo " HAY PERO no alcanza";
         } else if ($auxsabor) {
@@ -371,26 +416,28 @@ class Pizzeria
     public static function agregarProducto($sabor, $tipo, $cantidad, $precio, $fotoProducto)
     {
         $lista = self::LeerJSON(ARCHIVOPRODUCTO, PRODUCTO);
-
-        echo "esta lista: ";
-        var_dump($lista);
+        /* 
+        echo "<br>esta lista: <br>";
+        var_dump($lista); */
 
         $objeto = self::existeProducto($lista, $sabor, $tipo);
 
         if ($objeto == null) {
-            $nuevoHelado = new Pizza($sabor, $tipo, $cantidad, $precio, self::idIncremental($lista)+1); //incremental
-            echo "nombre archivo ($sabor.$tipo)";
+            $nuevoHelado = new Pizza($sabor, $tipo, $cantidad, $precio, self::idIncremental($lista) + 1); //incremental
+
+            echo "<br>NOMBRE archivo ($sabor.$tipo) <br>";
             var_dump($fotoProducto);
+
             array_push($lista, $nuevoHelado);
-        } 
-        else {
+        } else {
             $objeto->setCantidad($objeto->getCantidad() + $cantidad);
             echo "la nueva cantidad de pizza es " . $objeto->getCantidad();
         }
 
         if ($fotoProducto != null) {
-            
-            Upload::cargarImagenPorNombre($fotoProducto, ($sabor . $tipo), ARCHIVO_FOTO_PRODUCTO);
+            $var = $sabor . $tipo;
+            /*    echo "LLEGO HASTA ANTES DE UPLOAD $var"; */
+            Upload::cargarImagenPorNombre($fotoProducto, $var, ARCHIVO_FOTO_PRODUCTO);
         }
         self::guardarJson($lista, ARCHIVOPRODUCTO, PRODUCTO);
     }
@@ -414,9 +461,8 @@ class Pizzeria
     public static function idIncremental($lista)
     {
         $retorno = null;
-        foreach ($lista as $helado) 
-        {     
-            $retorno = $helado;      
+        foreach ($lista as $helado) {
+            $retorno = $helado;
         }
         return $helado->getId();
     }
@@ -451,5 +497,36 @@ class Pizzeria
             }
         }
         return $retorno;
+    }
+
+
+    public static function ListarVendidos($tipo)
+    {
+        if ($_GET["tipo"] == "borrado") {
+            $arrayBorrada = scandir("./backUpFotos/");
+           /*  var_dump($arrayBorrada); */
+
+            foreach ($arrayBorrada  as $file) {
+                if ($file != "." && $file != "..") {
+                    if (file_exists("./backUpFotos/$file")) {
+                        $strHtml = "<img src= ./backUpFotos/" . $file . " alt=" . " border=3 height=120px width=160px></img>";
+                        echo $strHtml;
+                    }
+                }
+            }
+        }
+        if ($_GET["tipo"] == "cargadas") {
+            $arrayBorrada = scandir(ARCHIVO_FOTO_PRODUCTO);
+           /*  var_dump($arrayBorrada); */
+
+            foreach ($arrayBorrada  as $file) {
+                if ($file != "." && $file != "..") {
+                    if (file_exists(ARCHIVO_FOTO_PRODUCTO.$file)) {
+                        $strHtml = "<img src=".ARCHIVO_FOTO_PRODUCTO. $file . " alt=" . " border=3 height=120px width=160px></img>";
+                        echo $strHtml;
+                    }
+                }
+            }
+        }
     }
 }

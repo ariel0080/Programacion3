@@ -1,5 +1,8 @@
-{"id":0,"sabor":"muzza","tipo":"molde","precio":"20","cantidad":17}
-{"id":1,"sabor":"jamon","tipo":"molde","precio":"150","cantidad":"2"}
+{"id":0,"sabor":"muzza","tipo":"molde","precio":"20","cantidad":22}
+{"id":1,"sabor":"jamon","tipo":"molde","precio":"500","cantidad":"500"}
 {"id":2,"sabor":"provolone","tipo":"molde","precio":"150","cantidad":"2"}
 {"id":3,"sabor":"lolo","tipo":"molde","precio":"150","cantidad":"2"}
-{"id":4,"sabor":"frutilla","tipo":"piedra","precio":"150","cantidad":"2"}
+{"id":4,"sabor":"frutilla","tipo":"piedra","precio":"33","cantidad":"33"}
+{"id":5,"sabor":"muzza","tipo":"piedra","precio":"120","cantidad":11}
+{"id":6,"sabor":"meme","tipo":"piedra","precio":"33","cantidad":34}
+{"id":7,"sabor":"yaestoycansada","tipo":"piedra","precio":"33","cantidad":34}

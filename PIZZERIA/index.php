@@ -27,6 +27,10 @@
                     echo " empieza carga";
                     require_once 'manejadores/PizzaCarga.php';
                     break;
+                case 'listado':
+                    echo " listado";
+                    require_once 'manejadores/ListadoDeImagenes.php';
+                    break;
             }
             break;
 
@@ -35,14 +39,25 @@
                 case 'consultarPizza':
                     require_once 'manejadores/PizzaConsultar.php';
                     break;
+                case 'altaPizza':
+                    require_once 'manejadores/altaPizza.php';
+                    break;
+
+                case 'altaVenta':
+                    if (isset($_FILES["foto"])) {
+                        require_once 'manejadores/AltaVentaFoto.php';
+                    } else {
+                        require_once 'manejadores/AltaVenta.php';
+                    }
+                    break;
             }
             break;
 
         case "PUT":
-            require_once 'manejadores/6modificarProducto.php';
+            require_once 'manejadores/PizzaCargaPlus.php';
             break;
         case "DELETE":
-            require_once 'manejadores/8borrarProducto.php';
+            require_once 'manejadores/BorrarPizza.php';
             break;
     }
 

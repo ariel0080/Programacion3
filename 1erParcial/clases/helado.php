@@ -1,21 +1,19 @@
 <?php
 
-class Pizza
+class Helado
 {
     private $sabor;
     private $tipo;
     private $precio;
     private $cantidad;
-    private $id;
 
     //#region Constructores
-    function __construct($esabor, $etipo, $ecantidad, $eprecio, $eid)
+    function __construct($esabor, $etipo, $ecantidad, $eprecio)
     {
         $this->tipo = $etipo;
         $this->sabor = $esabor;
         $this->precio = $eprecio;
         $this->cantidad = $ecantidad;
-        $this->id = $eid;
     }
     //#endregion
 
@@ -23,10 +21,6 @@ class Pizza
     public function getTipo()
     {
         return $this->tipo;
-    }
-    public function getId()
-    {
-        return $this->id;
     }
     public function getSabor()
     {
@@ -39,11 +33,6 @@ class Pizza
     public function getCantidad()
     {
         return $this->cantidad;
-    }
-
-    public function setId($var)
-    {
-        $this->tipo = $var;
     }
 
     public function setTipo($var)
@@ -67,15 +56,14 @@ class Pizza
 
     //#region GETTER SETTERS
 
-    public function MostrarPizza()
+    public function MostrarHelado()
     {
-        echo "ID: $this->id ||sabor: $this->sabor || tipo: $this->tipo || precio: $this->precio || cantidad: $this->cantidad";
+        echo "sabor: $this->sabor || tipo: $this->tipo || precio: $this->precio || cantidad: $this->cantidad";
     }
 
     public  function toArray()
     {
         $arrayAux = array();
-        array_push($arrayAux, $this->id);
         array_push($arrayAux, $this->sabor);
         array_push($arrayAux, $this->tipo);
         array_push($arrayAux, $this->precio);
@@ -85,12 +73,11 @@ class Pizza
         return $arrayAux;
     }
 
-       
+    
     public function crearTabla()
     {
         $strHtml = "";
         $strHtml .= "<tr>";
-        $strHtml .= "<td>" . $this->getId() . "</td>";
         $strHtml .= "<td>" . $this->getSabor() . "</td>";
         $strHtml .= "<td>" . $this->getTipo() . "</td>";
         $strHtml .= "<td>" . $this->getPrecio() . "</td>";
@@ -110,7 +97,6 @@ class Pizza
     public static function crearTablaHeader()
     {
         $strHtml = "<table border='1'>";
-        $strHtml .= "<th>ID</th>";
         $strHtml .= "<th>SABOR</th>";
         $strHtml .= "<th>TIPO</th>";
         $strHtml .= "<th>PRECIO</th>";
@@ -120,8 +106,9 @@ class Pizza
 
         return $strHtml;
     }
+}
 
 
     //#endregion
 
-}
+

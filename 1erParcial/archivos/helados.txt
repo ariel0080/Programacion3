@@ -2,4 +2,3 @@
 {"sabor":"limon","tipo":"crema","precio":"150","cantidad":"5000"}
 {"sabor":"frutilla","tipo":"crema","precio":"150","cantidad":6}
 {"sabor":"coco","tipo":"crema","precio":"150","cantidad":"10"}
-{"sabor":"menta","tipo":"crema","precio":"150","cantidad":20}

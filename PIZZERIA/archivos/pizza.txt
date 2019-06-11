@@ -1,2 +1,5 @@
-{"sabor":"MUZZA","tipo":"crema","precio":"100","cantidad":"6"}
-{"sabor":"jamon","tipo":"molde","precio":"150","cantidad":50}
+{"id":0,"sabor":"muzza","tipo":"molde","precio":"20","cantidad":17}
+{"id":1,"sabor":"jamon","tipo":"molde","precio":"150","cantidad":"2"}
+{"id":2,"sabor":"provolone","tipo":"molde","precio":"150","cantidad":"2"}
+{"id":3,"sabor":"lolo","tipo":"molde","precio":"150","cantidad":"2"}
+{"id":4,"sabor":"frutilla","tipo":"piedra","precio":"150","cantidad":"2"}

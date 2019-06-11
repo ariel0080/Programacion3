@@ -1,0 +1,4 @@
+{"nombre":"jose","producto":"frutillacrema","precio":300,"cantidadKg":"2"}
+{"nombre":"jose","producto":"frutillacrema","precio":300,"cantidadKg":"2"}
+{"nombre":"jose","producto":"frutillacrema","precio":300,"cantidadKg":"2"}
+{"nombre":"jose","producto":"frutillacrema","precio":300,"cantidadKg":"2"}

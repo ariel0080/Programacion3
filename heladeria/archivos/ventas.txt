@@ -2,3 +2,5 @@
 {"nombre":"pedro","helado":"chocolateLOLO","precio":750,"cantidadKg":"5"}
 {"nombre":"pedro","helado":"mentapopo","precio":750,"cantidadKg":"5"}
 {"nombre":"pedro","helado":"mentacrema","precio":750,"cantidadKg":"5"}
+{"nombre":"pedro","helado":"mentacrema","precio":750,"cantidadKg":"5"}
+{"nombre":"pedro","helado":"mentacrema","precio":750,"cantidadKg":"5"}

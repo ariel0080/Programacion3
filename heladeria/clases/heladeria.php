@@ -3,8 +3,8 @@ require_once 'cliente.php';
 require_once 'helado.php';
 require_once "./recursos/upload.php";
 
-define("ARCHIVOHELADO","./archivos/helados.txt",TRUE); 
-define("ARCHIVOVENTA","./archivos/ventas.txt",TRUE); 
+define("ARCHIVOHELADO", "./archivos/helados.txt", TRUE);
+define("ARCHIVOVENTA", "./archivos/ventas.txt", TRUE);
 
 
 class Heladeria
@@ -171,7 +171,7 @@ class Heladeria
 
         switch ($tipo) {
             case 'helado':
-                $lista = self::LeerJSON( ARCHIVOHELADO , $tipo);
+                $lista = self::LeerJSON(ARCHIVOHELADO, $tipo);
                 foreach ($lista as $objeto) {
                     $objeto->MostrarHelado();
                 }
@@ -218,115 +218,54 @@ class Heladeria
         $auxtipo = false;
 
         $lista = Heladeria::LeerJSON(ARCHIVOHELADO, "helado");
+
+
+
         foreach ($lista as $helado) {
             if ($helado->getSabor() == $sabor) {
                 $auxsabor = true;
-                
+
                 if ($helado->getTipo() == $tipo) {
                     $auxtipo = true;
                 }
             }
-            self::crearTabla($helado);
         }
         if ($auxsabor && $auxtipo) {
-            echo " <br> HAY HELADO DE SABOR Y TIPO<br> Cantidad Disponible " . $helado->getCantidad();
-        
-            self::crearTabla($helado); 
+            echo " <font><br> HAY HELADO DISPONIBLE <br><br><font>"; 
+            self::armarTablaIndivisual($helado);
         } else if ($auxsabor && !$auxtipo) {
-            echo "<br> HAY HELADO DE SABOR pero NO TIPO <br> Tipo Disponible: " . $helado->getTipo() . "<br>Cantidad Disponible: " . $helado->getCantidad();
+   
+            echo "<font> <br> HAY HELADO DE SABOR pero NO TIPO <br> Tipo Disponible: <br> <font>";
+            self::armarTablaIndivisual($helado);
         } else {
             echo "No hay Helado";
         }
-    } 
+    }
 
     public static function ListarVendidos($sabor, $tipo)
     {
-        $lista=self::LeerJSON(ARCHIVOVENTA, "venta");
-/*      echo "<br> lista ventas <br>";
-        var_dump($lista); */
-        $strHtml=self::crearTablaHeader($lista);
- 
-        foreach ($lista as $objeto) 
-        {
-            if (((strpos($objeto->gethelado(), $sabor) !== false)  || strpos($objeto->gethelado(), $tipo) !== false)) 
-            {
-                //mostrar venta...
-                $strHtml.= "<tr>";
-                $strHtml.= "<td>".$objeto->gethelado()."</td>";
-                $strHtml.= "<td>".$objeto->getnombre()."</td>";
-                $strHtml.= "<td>".$objeto->getPrecio()."</td>";
-                $strHtml.= "<td>".$objeto->getcantidadKg()."</td>";
+        $lista = self::LeerJSON(ARCHIVOVENTA, "venta");
 
-                $var = "./fotosHelados/" . $objeto->gethelado() . ".png";                
-                
-                if(file_exists($var))
-                {                 
-                    $strHtml.= "<td><img src=" . $var. " alt=" . "border=3 height=30% width=30%></img></td>";
-                }
-                else
-                {// Buscar imagen que diga No Disponible
-                    $strHtml.= "<td>"."Imagen NO Disponible"."</td>";
-                }
+        $strHtml = Cliente::crearTablaHeader();
+
+        foreach ($lista as $objeto) {
+            if (((strpos($objeto->gethelado(), $sabor) !== false)  || strpos($objeto->gethelado(), $tipo) !== false)) {
+                $strHtml .= $objeto->crearTabla($strHtml);
             }
-        } 
-        $strHtml.="</tbody>";
-        $strHtml.="</table>";
+        }
+        $strHtml .= "</tbody>";
+        $strHtml .= "</table>";
         echo $strHtml;
     }
-    
-    public static function crearTablaHeader($lista)
+
+    public static function armarTablaIndivisual($helado)
     {
-
-        foreach($lista as $key => $objeto)
-        {
-            $strHtml="<table border='1'>";
-            $strCabeceras = reset($lista);
-            $strHtml.="<th>HELADO</th>";
-            $strHtml.="<th>CLIENTE</th>";
-            $strHtml.="<th>PRECIO</th>";
-            $strHtml.="<th>CANTIDAD</th>";
-            $strHtml.="<th>FOTO</th>";
-            $strHtml.="<tbody>";
-            
-            return $strHtml;                    
-        }
-
-
+        $strHtml = Helado::crearTablaHeader();
+        $strHtml .= $helado->crearTabla();
+        $strHtml .= "</tbody>";
+        $strHtml .= "</table>";
+        echo $strHtml;
     }
-
-
-
-
-
-
-
-
-    public static function crearTabla($helado)
-    {
-
-        $var = "./fotosHelados/" . $helado->getSabor() . $helado->getTipo() . ".png";
-        echo "<tr>
-                <table>
-                <tr>
-                <th><img src=" . $var . " alt=" . " border=3 height=30% width=30%></img></th>
-                </tr>                
-                <tr>
-                <th>".$helado->getSabor()."</th>
-                </tr>                
-                <tr>
-                <th>".$helado->getTipo()."</th>
-                </tr>                
-                <th>".$helado->getPrecio()."</th>
-                </tr>                
-                <tr>
-                <th>".$helado->getCantidad()."</th>
-                </tr>                
-                </table> ";
-    }
-
-
-
-
 
 
     /**
@@ -406,7 +345,7 @@ class Heladeria
             array_push($listaVentas, $cliente);
 
             if ($foto != null) {
-                Upload::cargarImagenPorNombre($foto, ("venta$nombre" . date("d-m-y")), "./fotosVentas/");
+                Upload::cargarImagenPorNombre($foto, ("venta$nombre" . ($helado->getSabor() . $helado->getTipo())), "./fotosVentas/");
             }
 
             self::guardarJsonHeladeria($listaVentas, ARCHIVOVENTA, "venta");

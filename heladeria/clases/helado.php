@@ -73,7 +73,42 @@ class Helado
         return $arrayAux;
     }
 
+    
+    public function crearTabla()
+    {
+        $strHtml = "";
+        $strHtml .= "<tr>";
+        $strHtml .= "<td>" . $this->getSabor() . "</td>";
+        $strHtml .= "<td>" . $this->getTipo() . "</td>";
+        $strHtml .= "<td>" . $this->getPrecio() . "</td>";
+        $strHtml .= "<td>" . $this->getCantidad() . "</td>";
+
+        $var = "./fotosHelados/" . $this->getSabor() .$this->getTipo() . ".png";
+
+        if (file_exists($var)) {
+            $strHtml .= "<td><img src=" . $var . " alt=" . " border=3 height=120px width=160px></img></td>";
+        } else { // Buscar imagen que diga No Disponible
+            $strHtml .= "<td>" . "Imagen NO Disponible" . "</td>";
+        }
+        return $strHtml;
+    }
+
+
+    public static function crearTablaHeader()
+    {
+        $strHtml = "<table border='1'>";
+        $strHtml .= "<th>SABOR</th>";
+        $strHtml .= "<th>TIPO</th>";
+        $strHtml .= "<th>PRECIO</th>";
+        $strHtml .= "<th>CANTIDAD</th>";
+        $strHtml .= "<th>FOTO</th>";
+        $strHtml .= "<tbody>";
+
+        return $strHtml;
+    }
+}
+
 
     //#endregion
 
-}
+

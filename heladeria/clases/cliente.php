@@ -8,7 +8,7 @@ class Cliente
     private $cantidadKg;
 
     //#region Constructores
-    function __construct($ehelado , $enombre , $eprecio, $ecantidadKg)
+    function __construct($ehelado, $enombre, $eprecio, $ecantidadKg)
     {
         $this->helado = $ehelado;
         $this->nombre = $enombre;
@@ -74,41 +74,43 @@ class Cliente
     }
 
 
-//#endregion
+    //#endregion
 
 
 
 
-public static function crearTabla ()
-{
-    $strHtml=self::crearTablaHeader($lista);
- 
-    foreach ($lista as $objeto) 
+    public function crearTabla()
     {
-        if ($objeto->gethelado() == $sabor.$tipo) 
-        {
-            //mostrar venta...
-            $strHtml.= "<tr>";
-            $strHtml.= "<td>".$objeto->gethelado()."</td>";
-            $strHtml.= "<td>".$objeto->getnombre()."</td>";
-            $strHtml.= "<td>".$objeto->getPrecio()."</td>";
-            $strHtml.= "<td>".$objeto->getcantidadKg()."</td>";
+        $strHtml = "";
+        $strHtml .= "<tr>";
+        $strHtml .= "<td>" . $this->gethelado() . "</td>";
+        $strHtml .= "<td>" . $this->getnombre() . "</td>";
+        $strHtml .= "<td>" . $this->getPrecio() . "</td>";
+        $strHtml .= "<td>" . $this->getcantidadKg() . "</td>";
 
-            $var = "./fotosHelados/" . $objeto->gethelado() . ".png";                
-            
-            if(file_exists($var))
-            {                 
-                $strHtml.= "<td><img src=" . $var. " alt=" . " border=3 height=30% width=30%></img></td>";
-            }
-            else
-            {// Buscar imagen que diga No Disponible
-                $strHtml.= "<td>"."Imagen NO Disponible"."</td>";
-            }
+        $nombreFile = "venta".$this->getnombre() . $this->gethelado();
+
+        $var = "./fotosVentas/" . $nombreFile . ".png";
+
+        if (file_exists($var)) {
+            $strHtml .= "<td><img src=" . $var . " alt=" . " border=3 height=120px width=160px></img></td>";
+        } else { // Buscar imagen que diga No Disponible
+            $strHtml .= "<td>" . "Imagen NO Disponible" . "</td>";
         }
-    } 
-    $strHtml.="</tbody>";
-    $strHtml.="</table>";
-    echo $strHtml;
-}
+        return $strHtml;
+    }
 
+
+    public static function crearTablaHeader()
+    {
+        $strHtml = "<table border='1'>";
+        $strHtml .= "<th>HELADO</th>";
+        $strHtml .= "<th>CLIENTE</th>";
+        $strHtml .= "<th>PRECIO</th>";
+        $strHtml .= "<th>CANTIDAD</th>";
+        $strHtml .= "<th>FOTO</th>";
+        $strHtml .= "<tbody>";
+
+        return $strHtml;
+    }
 }

@@ -6,18 +6,13 @@ si no hay, pero hay el sabor y no el tipo, se avisa q hay sabor pero no tipo
 <?php
 
 echo 
-"<font size='3' color='blue'  
-face='verdana' style='font-weight:bold' 
-<br>CONSULTAR HELADO <br> </font>";
-
+"<font> <br>CONSULTAR HELADO <br> </font>";
 
 if(isset($_GET["sabor"]) && isset($_GET["tipo"]) )
 {    
     Heladeria::consultarHelado($_GET["sabor"], $_GET["tipo"]);
 }
-else{
-    echo "no paso nada";
-}
+
 
 
 

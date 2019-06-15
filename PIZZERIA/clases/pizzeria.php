@@ -29,7 +29,7 @@ class Pizzeria
 
 
     //#region Archivos
-
+/* 
     public static function Leer($formato, $nombreArchivo, $tipo)
     {
         $listado = array();
@@ -61,7 +61,7 @@ class Pizzeria
         }
         fclose($archivo);
         return $listado;
-    }
+    } */
 
 
     public static function LeerJSON($nombreArchivo, $tipo)
@@ -142,7 +142,7 @@ class Pizzeria
 
 
 
-    public static function guardarEnHeladeria($lista, $nombreArchivo, $tipo)
+    /* public static function guardarEnHeladeria($lista, $nombreArchivo, $tipo)
     {
         $archivo = fopen($nombreArchivo, "w");
 
@@ -168,7 +168,7 @@ class Pizzeria
         fclose($archivo);
         return $$lista;
     }
-
+ */
     //#endRegion
 
     public static function ListarTodo($tipo)
@@ -244,7 +244,7 @@ class Pizzeria
             echo "No hay pizza";
         }
     }
-
+/* 
 
     public static function crearTabla($helado)
     {
@@ -269,7 +269,7 @@ class Pizzeria
                 </table> ";
     }
 
-
+ */
 
 
 
@@ -319,40 +319,6 @@ class Pizzeria
         return $resp;
     }
 
-
-    public static function modificarHelado($_PUT)
-    {
-
-        if (isset($_PUT)) {
-            $sabor  = $_PUT["sabor"];
-            $tipo = $_PUT["tipo"];
-            $cantidad = $_PUT["cantidad"];
-            $precio = $_PUT["precio"];
-
-            $listaHelados = self::LeerJSON(ARCHIVOPRODUCTO, PRODUCTO);
-
-            foreach ($listaHelados as $helado) {
-                if ($helado->getSabor() == $sabor && $helado->getTipo() == $tipo) {
-
-                    $helado->setCantidad($cantidad);
-
-                    if ($precio != null) {
-                        $helado->setPrecio($precio);
-                    }
-                    if ($helado->getCantidad() == 0) {
-                        $key = (self::existeProductoKey($listaHelados, $sabor, $tipo));
-                        echo "<font size='3' color='red' face='verdana' style='font-weight:bold' <br>Archivo Eliminado <br> </font>";
-                        unset($listaHelados[$key]);
-                    }
-                    break;
-                }
-            }
-            self::guardarJson($listaHelados, ARCHIVOPRODUCTO, PRODUCTO);
-        }
-    }
-    /**
-     * ITEM 4
-     */
 
 
     /**

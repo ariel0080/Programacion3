@@ -2,3 +2,4 @@
 {"mail":"HOLA@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}
 {"mail":"HOLA@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}
 {"mail":"HOLA@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}
+{"mail":"HOLA@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}

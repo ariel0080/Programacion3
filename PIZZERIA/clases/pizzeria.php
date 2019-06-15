@@ -382,11 +382,6 @@ class Pizzeria
 
             $helado->setCantidad($helado->getCantidad() - $cantidad);
 
-            /*     if ($helado->getCantidad() == 0) {
-                $key = (self::existeProductoKey($listaHelados, $sabor, $tipo));
-                unset($listaHelados[$key]);
-            } */
-
             echo " <br> NUEVA Cantidad Disponible " . $helado->getCantidad() . " <br>";
 
             $cliente = new Cliente(($helado->getSabor() . $helado->getTipo()), $email, ($helado->getPrecio() * $cantidad), $cantidad);
@@ -404,9 +399,9 @@ class Pizzeria
         } else if ($auxsabor && $auxtipo && $helado->getCantidad() < $cantidad) {
             echo " HAY PERO no alcanza";
         } else if ($auxsabor) {
-            echo "<br>  HAY HELADO DE SABOR pero NO TIPO <br> Tipo Disponible: " . $helado->getTipo() . "<br>Cantidad Disponible: " . $helado->getCantidad();
+            echo "<br>  HAY PIZZA DE SABOR pero NO TIPO <br> Tipo Disponible: " . $helado->getTipo() . "<br>Cantidad Disponible: " . $helado->getCantidad();
         } else {
-            echo "No hay Helado";
+            echo "No hay PIZZA";
         }
     }
 

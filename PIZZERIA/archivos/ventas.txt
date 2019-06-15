@@ -1,14 +1,4 @@
 {"mail":"lolo@lolo","producto":"frutillapiedra","precio":150,"cantidadKg":"1"}
-{"mail":"lolo@lolo","producto":"frutillapiedra","precio":150,"cantidadKg":"1"}
-{"mail":"lala@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}
-{"mail":"lala@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}
-{"mail":"lala@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}
-{"mail":"lala@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}
-{"mail":"lala@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}
-{"mail":"lala@loloa","producto":"jamonmolde","precio":150,"cantidadKg":"1"}
-{"mail":"lala@loloa","producto":"jamonmolde","precio":300,"cantidadKg":"2"}
-{"mail":"lala@loloa","producto":"jamonmolde","precio":750,"cantidadKg":"5"}
-{"mail":"lala@loloa","producto":"jamonmolde","precio":150,"cantidadKg":"1"}
-{"mail":"lala@loloa","producto":"jamonmolde","precio":150,"cantidadKg":"1"}
-{"mail":"lala@loloa","producto":"jamonmolde","precio":150,"cantidadKg":"1"}
-{"mail":"HOLAoCTAVIO@loloa","producto":"jamonmolde","precio":150,"cantidadKg":"1"}
+{"mail":"HOLA@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}
+{"mail":"HOLA@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}
+{"mail":"HOLA@loloa","producto":"muzzamolde","precio":20,"cantidadKg":"1"}

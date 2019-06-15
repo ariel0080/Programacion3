@@ -12,33 +12,38 @@
 
 <body>
     <?php
-    require_once './clases/heladeria.php';
+    require_once './clases/pizzeria.php';
 
     date_default_timezone_set('America/Argentina/Buenos_Aires');
     
     $metodo = $_SERVER['REQUEST_METHOD'];
+
+    echo $metodo;
+
     switch ($metodo) {
         case "GET":
             switch (key($_GET)) {
-                case 'consultaHelado':
-                    require_once 'manejadores/2consultarHelado.php';
+                case 'consultaPizza':
+                    require_once 'manejadores/2consultarProducto.php';
                     break;
                 case 'consultaFiltrado':
-                    require_once 'manejadores/5listadoSabor.php';
+                    require_once 'manejadores/5listadoProducto.php';
                     break;
             }
             break;
 
         case "POST":
             switch (key($_POST)) {
-                case 'nuevoHelado':
+                case 'nuevaPizza':
                     if (isset($_FILES["foto"])) {
-                        require_once 'manejadores/7altaHeladoConFoto.php';
+                        require_once 'manejadores/7altaProductoConFoto.php';
                         break;
                     } else {
-                        require_once 'manejadores/1heladoCarga.php';
+                        echo "dame pizza";
+                        require_once 'manejadores/1productoCarga.php';
                         break;
                     }
+                    break;
                 case 'nuevaVenta':
                     if (isset($_FILES["foto"]))
                     {
@@ -56,10 +61,10 @@
                 break;
 
                 case "PUT":
-                    require_once 'manejadores/6modificarHelado.php';
+                    require_once 'manejadores/6modificarProducto.php';
                     break;
                 case "DELETE":
-                     require_once 'manejadores/8borrarHelado.php';
+                     require_once 'manejadores/8borrarProducto.php';
                     break;
             }
 

@@ -13,6 +13,9 @@ echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>N
 if (isset($_POST["sabor"]) && isset($_POST["tipo"]) && isset($_POST["cantidad"]) && isset($_POST["nombre"]) && isset  ($_FILES["foto"])) {
     Heladeria::nuevaVenta($_POST["sabor"], $_POST["tipo"], $_POST["cantidad"], $_POST["nombre"], $_FILES["foto"]);
 }
-
+else
+{
+    echo "nop";
+}
 
 

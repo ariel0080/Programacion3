@@ -408,6 +408,7 @@ class Pizzeria
     public static function ListarVendidos($tipo)
     {
         if ($tipo == "borrado") {
+            
             $arrayBorrada = scandir("./backUpFotos/");
            /*  var_dump($arrayBorrada); */
 
@@ -421,6 +422,7 @@ class Pizzeria
             }
         }
         if ($tipo == "cargadas") {
+
             $arrayBorrada = scandir(ARCHIVO_FOTO_PRODUCTO);
 
             foreach ($arrayBorrada  as $file) {

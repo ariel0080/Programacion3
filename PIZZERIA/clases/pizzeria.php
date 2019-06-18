@@ -64,7 +64,7 @@ class Pizzeria
     } */
 
 
-    public static function LeerJSON($nombreArchivo, $tipo)
+    private static function LeerJSON($nombreArchivo, $tipo)
     {
 
         $ruta = $nombreArchivo;
@@ -81,10 +81,6 @@ class Pizzeria
                         case PRODUCTO:
                             if (isset($objeto)) {
                                 $objeto = new Pizza($objeto->sabor, $objeto->tipo,  $objeto->cantidad, $objeto->precio, $objeto->id);
-                                /*             echo "objeto";
-                                var_dump($objeto);
-                                 */
-
                                 array_push($listado, $objeto);
                             }
                             break;
@@ -110,7 +106,7 @@ class Pizzeria
     /**
 
      */
-    public static function guardarJson($lista, $nombreArchivo, $tipo)
+   private static function guardarJson($lista, $nombreArchivo, $tipo)
     {
         $listado = $lista;
         echo "<br>-- guardarJson $nombreArchivo --- <br>";
@@ -142,33 +138,6 @@ class Pizzeria
 
 
 
-    /* public static function guardarEnHeladeria($lista, $nombreArchivo, $tipo)
-    {
-        $archivo = fopen($nombreArchivo, "w");
-
-        echo "<font size='3' color='blue'  face='verdana' style='font-weight:bold' <br>Lista Guardada COMPLETA en csv o txt <br> </font>";
-
-        foreach ($lista as $objeto) {
-
-            switch ($tipo) {
-                case PRODUCTO:
-                    if (!($objeto->getSabor() == '' || $objeto->getSabor() == '\n' || $objeto->getSabor() == ',')) {
-                        $aux = implode(',', $objeto->toArray());
-                        fputs($archivo,  $aux);
-                    }
-                    break;
-                case 'venta':
-                    if (!($objeto->getNombre() == '' || $objeto->getNombre() == '\n' || $objeto->getnombre() == ',')) {
-                        $aux = implode(',', $objeto->toArray());
-                        fputs($archivo,  $aux);
-                    }
-                    break;
-            }
-        }
-        fclose($archivo);
-        return $$lista;
-    }
- */
     //#endRegion
 
     public static function ListarTodo($tipo)
@@ -192,31 +161,6 @@ class Pizzeria
         }
     }
 
-
-    /*     public static function ListarTodoFiltro($tipo)
-    {
-        echo $tipo;
-
-        switch ($tipo) {
-            case 'helado':
-                $lista = self::LeerJSON("./archivos/helados.txt", "helado");
-                foreach ($lista as $objeto) {
-                    $objeto->MostrarHelado();
-                }
-                break;
-
-            case 'venta':
-                $lista = self::LeerJSON(ARCHIVOVENTA, "venta");
-                foreach ($lista as $objeto) {
-                    $objeto->MostrarCliente();
-                }
-                break;
-        }
-    }
- */
-    /**
-     * ITEM 3
-     */
 
     public static function consultarProducto($sabor, $tipo)
     {
@@ -463,7 +407,7 @@ class Pizzeria
 
     public static function ListarVendidos($tipo)
     {
-        if ($_GET["tipo"] == "borrado") {
+        if ($tipo == "borrado") {
             $arrayBorrada = scandir("./backUpFotos/");
            /*  var_dump($arrayBorrada); */
 
@@ -476,9 +420,8 @@ class Pizzeria
                 }
             }
         }
-        if ($_GET["tipo"] == "cargadas") {
+        if ($tipo == "cargadas") {
             $arrayBorrada = scandir(ARCHIVO_FOTO_PRODUCTO);
-           /*  var_dump($arrayBorrada); */
 
             foreach ($arrayBorrada  as $file) {
                 if ($file != "." && $file != "..") {

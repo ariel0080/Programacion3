@@ -1,12 +1,22 @@
 <?php
-namespace App\Models\ORM;
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+class Socio extends Persona
+{
 
+    private $estado;
 
-class Socio extends \Illuminate\Database\Eloquent\Model {
+    //#region Constructores
+    function __construct($enombre, $eapellido, $edni, $eedad, $eestado)
+    {
+        parent::__construct($enombre, $eapellido, $edni, $eedad);
+        $this->estado = $eestado;
+    }
+    //#endregion
 
-
+    public function getEstado()
+     {
+         return $this->estado;
+     }
+ 
 
 }
